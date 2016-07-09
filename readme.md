@@ -5,19 +5,19 @@ Clod is a system for easily deploying IoT devices based on espressif chips like 
 
 The main components of Clod are:
 
-Mosquitto MQTT server - intended to run on a Raspberry Pi, this facilitates communication with the devices via the MQTT protocol.
+* Mosquitto MQTT server - intended to run on a Raspberry Pi, this facilitates communication with the devices via the MQTT protocol.
 
-Clod MQTT standard - an intuitive location-based syntax for MQTT messages.
+* Clod MQTT standard - an intuitive location-based syntax for MQTT messages.
 
-Clod Scripts - monitors the messages in order to add functionality such as persistence, scheduling, and uploading.
+* Clod Scripts - monitors the messages in order to add functionality such as persistence, scheduling, and uploading.
 
-Crouton - a dashboard for controlling devices and viewing their output.
+* Crouton - a dashboard for controlling devices and viewing their output.
 
-Platform Io - manages OTA software updates and changes to the espressif chips.
+* Platform Io - manages OTA software updates and changes to the espressif chips.
 
-Arduino core for ESP8266.
+* Arduino core for ESP8266.
 
-Clod Sketch Library - Arduino sketches that have been modified for use with Clod and ESP8266 chips.
+* Clod Sketch Library - Arduino sketches that have been modified for use with Clod and ESP8266 chips.
 
 
 
