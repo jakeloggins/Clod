@@ -250,11 +250,10 @@ ESP8266 Installation
 Getting Started
 ----------------
 
-**Note: Prerequisites**:
+* **Prerequisites**:
   * All of the components installed, configured and running properly on your Raspberry Pi. 
   * An esp8266 chip loaded with the initial configuration script.
 
----
 
 * Point your browser to the Crouton landing page (default: http://192.168.1.140:8080).
 
