@@ -251,8 +251,8 @@ Getting Started
 ----------------
 
 **Note: Prerequisites**:
-..* All of the components installed, configured and running properly on your Raspberry Pi. 
-..* An esp8266 chip loaded with the initial configuration script.
+  * All of the components installed, configured and running properly on your Raspberry Pi. 
+  * An esp8266 chip loaded with the initial configuration script.
 
 ---
 
