@@ -254,23 +254,23 @@ Prerequisites:
 	All of the components installed, configured and running properly on your Raspberry Pi. 
 	An esp8266 chip loaded with the initial configuration script.
 
-Point your browser to the Crouton landing page (default: http://192.168.1.140:8080).
+* Point your browser to the Crouton landing page (default: http://192.168.1.140:8080).
 
-Turn on your esp8266 and connect to the wifi network "Clod" with a mobile device.
+* Turn on your esp8266 and connect to the wifi network "Clod" with a mobile device.
 
-Select your home wifi network's SSID from the list and enter the password.
+* Select your home wifi network's SSID from the list and enter the password.
 
-Make a note of the information displayed on the screen.
+* Make a note of the information displayed on the screen.
 
-In Crouton, select the "Connections" tab.
+* In Crouton, select the "Connections" tab.
 
-In the "Upload" section, select the device from the available devices drop down and [upload your desired sketch][]
+* In the "Upload" section, select the device from the available devices drop down and [upload your desired sketch][]
 
-Once successfully uploaded, select the device from the "Devices" section and click add.
+* Once successfully uploaded, select the device from the "Devices" section and click add.
 
-View information and controls from your device on the "Dashboard" tab.
+* View information and controls from your device on the "Dashboard" tab.
 
-You're done. Enjoy!
+* You're done. Enjoy!
 
 Data Structure
 --------------
