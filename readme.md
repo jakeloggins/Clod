@@ -46,186 +46,186 @@ This section will cover the initial setup of the Raspberry Pi, which will manage
 
 ## Configure WiFi
 
-	### From the root directory, check to make sure interfaces refers to wpa_supplicant:
-	```
-	sudo nano/etc/network/interfaces
-	```
+### From the root directory, check to make sure interfaces refers to wpa_supplicant:
+```
+sudo nano/etc/network/interfaces
+```
 
-	### Enter your ssid and password in wpa_supplicant:
-	```
-	sudo nano /etc/wpa_supplicant/wpa_supplicant.conf
-	```
-	```
-	network={
-	   ssid="yourssid"
-	   psk="yourpassword"
-	   key_mgmt=WPA-PSK
-	}
-	```
+### Enter your ssid and password in wpa_supplicant:
+```
+sudo nano /etc/wpa_supplicant/wpa_supplicant.conf
+```
+```
+network={
+   ssid="yourssid"
+   psk="yourpassword"
+   key_mgmt=WPA-PSK
+}
+```
 
-	### Edit etc/dhcpcd.conf:
-	```
-	sudo nano /etc/dhcpcd.conf
-	```
+### Edit etc/dhcpcd.conf:
+```
+sudo nano /etc/dhcpcd.conf
+```
 
-	```
-	interface eth0
-	static ip_address=192.168.1.140/24
-	static routers=192.168.1.1
-	static domain_name_servers=192.168.1.1 8.8.8.8
+```
+interface eth0
+static ip_address=192.168.1.140/24
+static routers=192.168.1.1
+static domain_name_servers=192.168.1.1 8.8.8.8
 
-	interface wlan0
-	static ip_address=192.168.1.140/24
-	static routers=192.168.1.1
-	static domain_name_servers=192.168.1.1 8.8.8.8
-	```
-	### Now restart dhcpcd
-	```
-	sudo service dhcpcd restart
-	```
+interface wlan0
+static ip_address=192.168.1.140/24
+static routers=192.168.1.1
+static domain_name_servers=192.168.1.1 8.8.8.8
+```
+### Now restart dhcpcd
+```
+sudo service dhcpcd restart
+```
 
 ## Change the username to something other than pi (default: clod)
 
-	* ```sudo passwd root ```
-	* enter a good password (default: "!ClodMQTT!")
-	* From the desktop rather than the terminal window, go to Menu > Preferences > Raspberry Pi Configuration
-	* uncheck "auto login as pi"
-	* Menu > Reboot
-	* Open a terminal window: Menu > Accessories > Terminal
-	* ``` usermod -l clod pi ```
-	* ``` usermod -m -d /home/clod clod
-	* From the desktop, click Menu > Logout
-	* Enter your new username (default: clod) and "raspberry" as the password
-	* Open a terminal window: Menu > Accessories > Terminal
-	* ``` passwd ``` - change the password to something better, the default used in the disk image is "!ClodMQTT!"
-	* ``` sudo passwd -l root ``` - disables the root password
-	* ``` sudo groupmod -n clod pi ``` - change the group from pi to clod
+* ```sudo passwd root ```
+* enter a good password (default: "!ClodMQTT!")
+* From the desktop rather than the terminal window, go to Menu > Preferences > Raspberry Pi Configuration
+* uncheck "auto login as pi"
+* Menu > Reboot
+* Open a terminal window: Menu > Accessories > Terminal
+* ``` usermod -l clod pi ```
+* ``` usermod -m -d /home/clod clod
+* From the desktop, click Menu > Logout
+* Enter your new username (default: clod) and "raspberry" as the password
+* Open a terminal window: Menu > Accessories > Terminal
+* ``` passwd ``` - change the password to something better, the default used in the disk image is "!ClodMQTT!"
+* ``` sudo passwd -l root ``` - disables the root password
+* ``` sudo groupmod -n clod pi ``` - change the group from pi to clod
 
 ## Check that SSHD is enabled
 
-	```sudo service sshd status ``` 
-	The word "active" should be in green along with other information.
+```sudo service sshd status ``` 
+The word "active" should be in green along with other information.
 
-	If you're going to want to access your pi with SSH later or other advanced fiddling, please consider disabling SSH passwords and using a public/private key pair. Consult the guides [here](http://raspi.tv/2012/how-to-set-up-keys-and-disable-password-login-for-ssh-on-your-raspberry-pi) and [here](https://www.raspberrypi.org/documentation/remote-access/ssh/passwordless.md).
+If you're going to want to access your pi with SSH later or other advanced fiddling, please consider disabling SSH passwords and using a public/private key pair. Consult the guides [here](http://raspi.tv/2012/how-to-set-up-keys-and-disable-password-login-for-ssh-on-your-raspberry-pi) and [here](https://www.raspberrypi.org/documentation/remote-access/ssh/passwordless.md).
 
 ## Components and Dependencies
 
-	### Node
+### Node
 
-		* Open a terminal window: Menu > Accessories > Terminal
+* Open a terminal window: Menu > Accessories > Terminal
 
-		* Go to the root directory
+* Go to the root directory
 
-		* ```curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -```
+* ```curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -```
 
-		* ```sudo apt-get install -y nodejs```
+* ```sudo apt-get install -y nodejs```
 
-	### Crouton
+### Crouton
 
-		* Go to the user home directory (default: home/clod)
+* Go to the user home directory (default: home/clod)
 
-		* ``` git clone https://github.com/jakeloggins/crouton-new.git ```
+* ``` git clone https://github.com/jakeloggins/crouton-new.git ```
 
-	### NPM
+### NPM
 
-		* Go to the Crouton folder
+* Go to the Crouton folder
 
-		* ``` sudo npm update ```
+* ``` sudo npm update ```
 
-	### Bower
+### Bower
 
-		* ``` sudo npm install -g bower ```
+* ``` sudo npm install -g bower ```
 
-		* ``` bower install ```
+* ``` bower install ```
 
-	### Later
+### Later
 
-		* ``` npm install later ```
+* ``` npm install later ```
 
-	### Platform Io
+### Platform Io
 
-		* Go to the user home directory (default: home/clod)
+* Go to the user home directory (default: home/clod)
 
-		* ``` sudo pip install -U platformio
+* ``` sudo pip install -U platformio
 
-		* ``` platformio platforms install espressif ```
+* ``` platformio platforms install espressif ```
 
-		* Go to the .platformio directory (default: home/clod/.platformio)
+* Go to the .platformio directory (default: home/clod/.platformio)
 
-		* ``` mkdir -m 777 lib ```
+* ``` mkdir -m 777 lib ```
 
-		* ``` cp -a ~/crouton-new/sketch_libraries/. ~/.platformio/lib/ ```
+* ``` cp -a ~/crouton-new/sketch_libraries/. ~/.platformio/lib/ ```
 
 
 ## Mosquitto MQTT Broker
 
-	 ### Install
+### Install
 
-	 	* Go to the root directory
+* Go to the root directory
 
-	 	* ```sudo wget http://repo.mosquitto.org/debian/mosquitto-repo.gpg.key ```
+* ```sudo wget http://repo.mosquitto.org/debian/mosquitto-repo.gpg.key ```
 
-	 	* ``` sudo apt-key add mosquitto-repo.gpg.key ```
+* ``` sudo apt-key add mosquitto-repo.gpg.key ```
 
-	 	* ``` cd /etc/apt/sources.list.d/ ```
+* ``` cd /etc/apt/sources.list.d/ ```
 
-	 	* ``` sudo wget http://repo.mosquitto.org/debian/mosquitto-jessie.list ```
+* ``` sudo wget http://repo.mosquitto.org/debian/mosquitto-jessie.list ```
 
-	 	* ``` sudo apt-get update ```
+* ``` sudo apt-get update ```
 
-	 	* ``` sudo apt-get install mosquitto ```
+* ``` sudo apt-get install mosquitto ```
 
-	 	* ``` sudo apt-get install mosquitto-clients python-mosquitto ```
+* ``` sudo apt-get install mosquitto-clients python-mosquitto ```
 
-	 ### Edit the configuration file
+### Edit the configuration file
 
-	 	* ``` sudo nano etc/mosquitto/mosquitto.conf ```
+* ``` sudo nano etc/mosquitto/mosquitto.conf ```
 
-	 	* Make the configuration file look like this:
+* Make the configuration file look like this:
 
-			```
-			# Place your local configuration in /etc/mosquitto/conf.d/
-			#
-			# A full description of the configuration file is at
-			# /usr/share/doc/mosquitto/examples/mosquitto.conf.example
+```
+# Place your local configuration in /etc/mosquitto/conf.d/
+#
+# A full description of the configuration file is at
+# /usr/share/doc/mosquitto/examples/mosquitto.conf.example
 
-			pid_file /var/run/mosquitto.pid
+pid_file /var/run/mosquitto.pid
 
-			persistence true
-			persistence_location /var/lib/mosquitto/
+persistence true
+persistence_location /var/lib/mosquitto/
 
-			log_dest file /var/log/mosquitto/mosquitto.log
+log_dest file /var/log/mosquitto/mosquitto.log
 
-			#include_dir /etc/mosquitto/conf.d
+#include_dir /etc/mosquitto/conf.d
 
-			listener 1883
+listener 1883
 
-			listener 9001
-			protocol websockets
-			```
+listener 9001
+protocol websockets
+```
 
-	### Verify mosquitto is running properly
+### Verify mosquitto is running properly
 
-		* ``` sudo service mosquitto restart ```
+* ``` sudo service mosquitto restart ```
 
-		* Open another terminal window: Menu > Accessories > Terminal
+* Open another terminal window: Menu > Accessories > Terminal
 
-		* type ``` mosquitto_sub -t /# -v ``` in one window
+* type ``` mosquitto_sub -t /# -v ``` in one window
 
-		* type ``` mosquitto_pub -t /whatever -m "test" ``` in the other window
+* type ``` mosquitto_pub -t /whatever -m "test" ``` in the other window
 
-		* you should now see ``` /whatever test ``` in the first window
+* you should now see ``` /whatever test ``` in the first window
 
 
 ## Start Crouton and the Node Scripts
 	
-	**Note**: This step will be eliminated when everything is programmed to run on startup.
+**Note**: This step will be eliminated when everything is programmed to run on startup.
 
-	* Open a new terminal window and go to the Crouton folder before each of the subsequent steps.
-	* ``` node app.js ```
-	* ``` node scheduler.js ```
-	* ``` node uploader.js ```
-	* ``` node persistence.js ```
+* Open a new terminal window and go to the Crouton folder before each of the subsequent steps.
+* ``` node app.js ```
+* ``` node scheduler.js ```
+* ``` node uploader.js ```
+* ``` node persistence.js ```
 
 
 
