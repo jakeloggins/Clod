@@ -46,12 +46,12 @@ This section will cover the initial setup of the Raspberry Pi, which will manage
 
 ### Configure WiFi
 
-#### From the root directory, check to make sure interfaces refers to wpa_supplicant:
+**From the root directory, check to make sure interfaces refers to wpa_supplicant:**
 ```
 sudo nano/etc/network/interfaces
 ```
 
-#### Enter your ssid and password in wpa_supplicant:
+**Enter your ssid and password in wpa_supplicant:**
 ```
 sudo nano /etc/wpa_supplicant/wpa_supplicant.conf
 ```
@@ -63,7 +63,7 @@ network={
 }
 ```
 
-#### Edit etc/dhcpcd.conf:
+**Edit etc/dhcpcd.conf:**
 ```
 sudo nano /etc/dhcpcd.conf
 ```
@@ -79,7 +79,7 @@ static ip_address=192.168.1.140/24
 static routers=192.168.1.1
 static domain_name_servers=192.168.1.1 8.8.8.8
 ```
-#### Now restart dhcpcd
+**Now restart dhcpcd**
 ```
 sudo service dhcpcd restart
 ```
@@ -123,7 +123,7 @@ If you're going to want to access your pi with SSH later or other advanced fiddl
 
 ### Components and Dependencies
 
-#### Node
+**Node**
 
 * Open a terminal window: Menu > Accessories > Terminal
 
@@ -133,29 +133,29 @@ If you're going to want to access your pi with SSH later or other advanced fiddl
 
 * ```sudo apt-get install -y nodejs```
 
-#### Crouton
+**Crouton**
 
 * Go to the user home directory (default: home/clod)
 
 * ``` git clone https://github.com/jakeloggins/crouton-new.git ```
 
-#### NPM
+**NPM**
 
 * Go to the Crouton folder
 
 * ``` sudo npm update ```
 
-#### Bower
+**Bower**
 
 * ``` sudo npm install -g bower ```
 
 * ``` bower install ```
 
-#### Later
+**Later**
 
 * ``` npm install later ```
 
-#### Platform Io
+**Platform Io**
 
 * Go to the user home directory (default: home/clod)
 
@@ -172,7 +172,7 @@ If you're going to want to access your pi with SSH later or other advanced fiddl
 
 ### Mosquitto MQTT Broker
 
-#### Install
+**Install**
 
 * Go to the root directory
 
@@ -190,7 +190,7 @@ If you're going to want to access your pi with SSH later or other advanced fiddl
 
 * ``` sudo apt-get install mosquitto-clients python-mosquitto ```
 
-#### Edit the configuration file
+**Edit the configuration file**
 
 * ``` sudo nano etc/mosquitto/mosquitto.conf ```
 
@@ -217,7 +217,7 @@ listener 9001
 protocol websockets
 ```
 
-#### Verify mosquitto is running properly
+**Verify mosquitto is running properly**
 
 * ``` sudo service mosquitto restart ```
 
