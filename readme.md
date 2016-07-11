@@ -24,7 +24,15 @@ The main components of Clod are:
 Raspberry Pi Installation
 --------------------------
 
-Instructions [here](pi-install.md)
+This section will cover the initial setup of the Raspberry Pi, which will manage device communication, monitoring, and maintenance. There are two options for completing it:
+
+* A [step-by-step guide](pi-install.md):
+  * Approximately 1 hour to complete all of the steps.
+  * Requires the use of a monitor connected to the Pi throughout the setup process.
+
+* A [disk image](disk-image.md) with Raspbian and all of the steps in the guide already completed.
+  * Significantly faster process, just mount the disk image to an SD card and insert it into the Pi.
+  * Does not require the use of a monitor.
 
 
 
