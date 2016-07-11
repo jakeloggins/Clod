@@ -1,4 +1,4 @@
-Raspberry Pi Installation
+Raspberry Pi Manual Installation
 --------------------------
 
 This section will cover the initial setup of the Raspberry Pi, which will manage device communication, monitoring, and maintenance. **If you would like to skip the section**, this [disk image](disk-image-install.md) contains a Raspbian environment with all of the necessary components installed and properly configured.

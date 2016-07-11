@@ -20,7 +20,7 @@ Raspberry Pi Disk Image Installation
 
 ### Defaults
 
-Should you desire to do some advanced configuration later, here are the defaults:
+Should you desire to do some advanced configuration, here are some default settings:
 
 * User: clod
 * Pass: !ClodMQTT!

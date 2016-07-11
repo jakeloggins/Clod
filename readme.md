@@ -7,9 +7,9 @@ The main components of Clod are:
 
 * Mosquitto MQTT server - intended to run on a Raspberry Pi, this facilitates communication with the devices via the MQTT protocol.
 
-* Clod MQTT standard - an intuitive location-based syntax for MQTT messages.
+* [Clod MQTT standard](https://github.com/jakeloggins/clod-MQTT-standard) - an intuitive location-based syntax for MQTT messages.
 
-* Clod Scripts - monitors the messages in order to add functionality such as persistence, scheduling, and uploading.
+* [Clod Scripts](https://github.com/jakeloggins/clod-scripts) - monitors the messages in order to add functionality such as persistence, scheduling, and uploading.
 
 * Crouton - a dashboard for controlling devices and viewing their output.
 
@@ -17,7 +17,9 @@ The main components of Clod are:
 
 * Arduino core for ESP8266.
 
-* Clod Sketch Library - Arduino sketches that have been modified for use with Clod and ESP8266 chips.
+* [ESP8266 WiFI Manager](https://github.com/tzapu/WiFiManager)
+
+* [Clod Sketch Library](https://github.com/jakeloggins/clod-sketch-library) - Arduino sketches that have been modified for use with Clod and ESP8266 chips.
 
 
 
