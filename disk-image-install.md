@@ -16,7 +16,7 @@ Raspberry Pi Disk Image Installation
 
 * Insert the memory card into your Pi and power it on.
 
-* You are now ready to proceed to the [Getting Started](https://github.com/jakeloggins/clod#getting-started) section. 
+* You are now ready to proceed to the [Getting Started](https://github.com/jakeloggins/Clod#getting-started) section. 
 
 ### Defaults
 
