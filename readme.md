@@ -33,7 +33,7 @@ This section will cover the initial setup of the Raspberry Pi, which will manage
   * Requires the use of a monitor connected to the Pi throughout the setup process.
 
 * A [disk image](disk-image-install.md) with Raspbian and all of the steps in the guide already completed.
-  * Significantly faster process, just mount the disk image to an SD card and insert it into the Pi.
+  * Significantly faster process. Just mount the disk image to an SD card and insert it into the Pi.
   * Does not require the use of a monitor.
 
 
@@ -62,18 +62,25 @@ Getting Started
 
 * In Crouton, select the "Connections" tab.
 
-* In the "Upload" section, select the device from the available devices drop down and [upload your desired sketch][]
+* In the "Upload" section, select the device from the available devices drop down and [upload your desired sketch]()
 
-* Once successfully uploaded, select the device from the "Devices" section and click add.
+* If the sketch uploaded successfully, you'll see a prompt at the bottom of the screen.
+
+  * The prompt may display assembly and configuration information unique to the sketch. If it does, follow the directions. 
+
+* Once successfully uploaded and configured, select the device from the "Devices" section and click add.
 
 * View information and controls from your device on the "Dashboard" tab.
 
 * You're done. Enjoy!
 
-Data Structure
---------------
 
+Advanced Topics
+---------------
 
+Check out the [Clod Sketch Library]() to see what you can do with Clod. If you don't see something useful, [make your own sketch]() or [email a suggestion]().
 
-Create Your Own Sketch
-----------------------
+Don't like the Crouton interface? Familiarize yourself with the [data structure]() and make your own.
+
+Want to add a non-espressif device? Use the example [python]() and [arduino]() clients.
+
