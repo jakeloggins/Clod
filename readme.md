@@ -30,7 +30,7 @@ This section will cover the initial setup of the Raspberry Pi, which will manage
   * Approximately 1 hour to complete all of the steps.
   * Requires the use of a monitor connected to the Pi throughout the setup process.
 
-* A [disk image](disk-image.md) with Raspbian and all of the steps in the guide already completed.
+* A [disk image](disk-image-install.md) with Raspbian and all of the steps in the guide already completed.
   * Significantly faster process, just mount the disk image to an SD card and insert it into the Pi.
   * Does not require the use of a monitor.
 
