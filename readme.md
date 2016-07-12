@@ -17,7 +17,7 @@ The main components of Clod are:
 
 * Arduino core for ESP8266.
 
-* [ESP8266 WiFI Manager](https://github.com/tzapu/WiFiManager)
+* [ESP8266 WiFi Manager](https://github.com/tzapu/WiFiManager)
 
 * [Clod Sketch Library](https://github.com/jakeloggins/Clod-sketch-library) - Arduino sketches that have been modified for use with Clod and ESP8266 chips.
 
@@ -66,7 +66,7 @@ Getting Started
 
 * If the sketch uploaded successfully, you'll see a prompt at the bottom of the screen.
 
-  * The prompt may display assembly and configuration information unique to the sketch. If it does, follow the directions. 
+  * The prompt may display a link to assembly and configuration information unique to the sketch. If it does, follow the directions. 
 
 * Once successfully uploaded and configured, select the device from the "Devices" section and click add.
 
@@ -80,7 +80,8 @@ Advanced Topics
 
 Check out the [Clod Sketch Library]() to see what you can do with Clod. If you don't see something useful, [make your own sketch]() or [email a suggestion]().
 
-Don't like the Crouton interface? Familiarize yourself with the [data structure]() and make your own.
+Don't like the Crouton interface? Everything in Clod is managed by MQTT messages. Crouton is simply one of many ways to send and receive those messages. Familiarize yourself with the [data structure]() and make your own interface. 
 
 Want to add a non-espressif device? Use the example [python]() and [arduino]() clients.
+
 
