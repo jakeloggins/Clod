@@ -13,7 +13,7 @@ The main components of Clod are:
 
 * Crouton - a dashboard for controlling devices and viewing their output.
 
-* Platform Io - manages OTA software updates and changes to the espressif chips.
+* PlatformIO - manages OTA software updates and changes to the espressif chips.
 
 * Arduino core for ESP8266.
 
@@ -80,7 +80,7 @@ Advanced Topics
 
 Check out the [Clod Sketch Library]() to see what you can do with Clod. If you don't see something useful, [make your own sketch]() or [email a suggestion]().
 
-Don't like the Crouton interface? Everything in Clod is managed by MQTT messages. Crouton is simply one of many ways to send and receive those messages. Familiarize yourself with the [data structure]() and make your own interface. 
+Don't like the Crouton interface? Everything in Clod is managed by MQTT messages. Crouton is simply one of many ways to send and receive them. Familiarize yourself with the [data structure]() and make your own interface. 
 
 Want to add a non-espressif device? Use the example [python]() and [arduino]() clients.
 
