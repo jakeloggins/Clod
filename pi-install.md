@@ -209,7 +209,7 @@ protocol websockets
 
 ### Setup Systemd
 	
-Systemd will make all of the Clod-scripts run automatically on boot.
+Systemd will make all of the Clod-scripts and the crouton dashboard run automatically on boot.
 
 * Navigate to `/etc/systemd/system`
 
@@ -307,4 +307,4 @@ WantedBy=default.target
 
 * `sudo reboot`
 
-* *sudo systemctl* - check the list to see if all of the Clod Services are running.
+* `sudo systemctl` - check the list to see if all of the Clod Services are running.
