@@ -11,7 +11,7 @@ The main components of Clod are:
 
 * [Clod Scripts](https://github.com/jakeloggins/Clod-scripts) - monitors the messages in order to add functionality such as persistence, scheduling, and uploading.
 
-* Crouton - a dashboard for controlling devices and viewing their output.
+* [Crouton](https://github.com/jakeloggins/crouton-new) - a dashboard for controlling devices and viewing their output.
 
 * PlatformIO - manages OTA software updates and changes to the espressif chips.
 
