@@ -207,12 +207,104 @@ protocol websockets
 * you should now see ``` /whatever test ``` in the first window
 
 
-### Start Crouton and the Node Scripts
+### Setup Systemd
 	
-**Note**: This step will be eliminated when everything is programmed to run on startup.
+Systemd will make all of the Clod-scripts run automatically on boot.
 
-* Open a new terminal window and go to the Crouton folder before each of the subsequent steps.
-* ``` node app.js ```
-* ``` node scheduler.js ```
-* ``` node uploader.js ```
-* ``` node persistence.js ```
+* Navigate to `/etc/systemd/system`
+
+* Create the following files, naming them ClodUploader.service, ClodScheduler.service, ClodPersistence.service, and ClodCrouton.service:
+
+Example files:
+
+```
+[Unit]
+Description=Clod Uploader
+
+[Service]
+WorkingDirectory=/home/clod/Clod-scripts
+ExecStart=/usr/bin/node /home/clod/Clod-scripts/uploader.js
+Restart=always
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=ClodUploader
+User=root
+Group=root
+Environment=NODE_ENV=production
+
+[Install]
+WantedBy=default.target
+
+---
+
+[Unit]
+Description=Clod Scheduler
+
+[Service]
+WorkingDirectory=/home/clod/Clod-scripts
+ExecStart=/usr/bin/node /home/clod/Clod-scripts/scheduler.js
+Restart=always
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=ClodScheduler
+User=root
+Group=root
+Environment=NODE_ENV=production
+
+[Install]
+WantedBy=default.target
+
+---
+
+[Unit]
+Description=Clod Persistence
+
+[Service]
+WorkingDirectory=/home/clod/Clod-scripts
+ExecStart=/usr/bin/node /home/clod/Clod-scripts/persistence.js
+Restart=always
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=ClodPersistence
+User=root
+Group=root
+Environment=NODE_ENV=production
+
+[Install]
+WantedBy=default.target
+
+--
+
+[Unit]
+Description=Clod Crouton
+
+[Service]
+WorkingDirectory=/home/clod/crouton-new
+ExecStart=/usr/bin/node /home/clod/crouton-new/app.js
+Restart=always
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=ClodCrouton
+User=root
+Group=root
+Environment=NODE_ENV=production
+
+[Install]
+WantedBy=default.target
+```
+
+* `sudo chmod u+rwx` to all the files
+
+* `sudo systemctl daemon-reload` - make systemd aware of changed files
+
+* `sudo systemctl enable ClodUploader.service`
+
+* `sudo systemctl enable ClodScheduler.service`
+
+* `sudo systemctl enable ClodPersistence.service`
+
+* `sudo systemctl enable ClodCrouton.service`
+
+* `sudo reboot`
+
+* *sudo systemctl* - check the list to see if all of the Clod Services are running.
