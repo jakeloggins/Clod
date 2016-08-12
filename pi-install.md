@@ -25,7 +25,7 @@ This section will cover the initial setup of the Raspberry Pi, which will manage
 
 **From the root directory, check to make sure interfaces refers to wpa_supplicant:**
 ```
-sudo nano/etc/network/interfaces
+sudo nano /etc/network/interfaces
 ```
 
 **Enter your ssid and password in wpa_supplicant:**
@@ -37,6 +37,17 @@ network={
    ssid="yourssid"
    psk="yourpassword"
    key_mgmt=WPA-PSK
+}
+```
+
+**From the root directory and create a boot/wifilogin.json file**
+```
+sudo nano /boot/wifilogin.json
+```
+```
+{
+	"ssid": "yourWifiSSIDHere",
+	"password": "yourWifiPASSWORDHere"
 }
 ```
 

@@ -12,7 +12,7 @@ Raspberry Pi Disk Image Installation
 
 * Open and edit the wpa_supplicant.conf to include your wifi network's SSID and password.
 
-* Open and edit the wifipass.json file to include your wifi network's SSID and password.
+* Open and edit the wifilogin.json file to include your wifi network's SSID and password.
 
 * Insert the memory card into your Pi and power it on.
 
