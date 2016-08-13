@@ -155,7 +155,7 @@ If you're going to want to access your pi with SSH later or other advanced fiddl
 
 * ``` mkdir -m 777 lib ```
 
-* ``` cp -a ~/crouton-new/sketch_libraries/. ~/.platformio/lib/ ```
+* ``` cp -a ~/crouton-new/platformio_dependencies/. ~/.platformio/lib/ ```
 
 
 ### Mosquitto MQTT Broker
