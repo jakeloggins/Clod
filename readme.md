@@ -41,7 +41,7 @@ This section will cover the initial setup of the Raspberry Pi, which will manage
 ESP8266 Installation
 --------------------
 
-* Install the Initial Configuration script on your ESP8266. (Guide coming soon)
+* Install the Initial Configuration script on your ESP8266 by following [this guide](https://github.com/jakeloggins/Clod/blob/master/esp-install.md).
 
 
 Getting Started
