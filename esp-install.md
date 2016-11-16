@@ -24,19 +24,20 @@ Using Platform IO
 
 	* On the left pane, expand `src` and open `ESPBoardDefs.h`
 
-	* change `String board_type = "esp01_1m";` to match the type of ESP board type you have, here is the list:
+	* Change `String board_type = "esp01_1m";` to match the type of ESP board type you have. [List of available board types](http://docs.platformio.org/en/stable/platforms/espressif8266.html#espressif)
 
 * Edit platformio.ini
 
 	* Open the platformio.ini file
 
-	* make sure `board = esp01_1m` matches the definition file
+	* Make sure `board = esp01_1m` matches the definition file
 
 * Click upload button (the rightward arrow on the top panel)
 
-* Close the serial terminal, or remove the usb cable from your chip
+* Close the serial terminal, or remove the usb cable from your computer
 
 * Power on the chip
 
-* Follow the rest of this guide
+* Follow the [rest](https://github.com/jakeloggins/Clod#getting-started) of this guide 
 
+* Note: After completing this section, you will never need to connect the chip to your computer again (assuming nothing goes wrong).
