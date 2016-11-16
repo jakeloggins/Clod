@@ -12,27 +12,31 @@ Follow [this excellent MAKE guide](http://makezine.com/2015/04/01/installing-bui
 Using Platform IO
 -----------------
 
-Install Platform IO
+* [Install Platform IO](http://docs.platformio.org/en/stable/installation.html)
 
----link here
+* Download the Clod-sketch-library to your computer
 
-Download the Clod-sketch-library to your computer
+* Open the Initial_Config folder within the Clod-sketch-library
 
-Open the Initial_Config project folder
+	* File > Add Project Folder > Initial_Config
 
-edit the conditional definition file (ESPBoardDefs.h) based on the board type you have, here is the list
+* Edit the definition file
 
-hit the upload button
+	* On the left pane, expand `src` and open `ESPBoardDefs.h`
 
-close the serial terminal, or remove the usb cable from your chip
+	* change `String board_type = "esp01_1m";` to match the type of ESP board type you have, here is the list:
 
-power on the chip
+* Edit platformio.ini
 
-follow the rest of this guide
+	* Open the platformio.ini file
 
+	* make sure `board = esp01_1m` matches the definition file
 
-conditional definition file (based on board type) - just have to edit it yourself to match platformio
+* Click upload button (the rightward arrow on the top panel)
 
-upload the initial config script
+* Close the serial terminal, or remove the usb cable from your chip
 
-follow the rest of the guide
+* Power on the chip
+
+* Follow the rest of this guide
+
