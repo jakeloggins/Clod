@@ -62,7 +62,7 @@ Getting Started
 
 * In Crouton, select the "Connections" tab.
 
-* In the "Upload" section, select the device from the available devices drop down and [upload your desired sketch]()
+* In the "Upload" section, select the device from the available devices drop down and upload your desired sketch.
 
 * If the sketch uploaded successfully, you'll see a prompt at the bottom of the screen.
 
@@ -78,10 +78,9 @@ Getting Started
 Advanced Topics
 ---------------
 
-Check out the [Clod Sketch Library]() to see what you can do with Clod. If you don't see something useful, [make your own sketch]() or [email a suggestion]().
+Check out the [Clod Sketch Library](https://github.com/jakeloggins/Clod-sketch-library) to see what you can do with Clod. If you don't see something useful, [make your own sketch](https://github.com/jakeloggins/Clod-sketch-library#custom-sketch-protocol) or [email a suggestion]().
 
-Don't like the Crouton interface? Everything in Clod is managed by MQTT messages. Crouton is simply one of many ways to send and receive them. Familiarize yourself with the [data structure]() and make your own interface. 
+Don't like the Crouton interface? Everything in Clod is managed by MQTT messages. Crouton is simply one of many ways to send and receive them. Familiarize yourself with the [data structure](https://github.com/jakeloggins/crouton-new/blob/master/example_of_objects.md) and make your own interface. 
 
-Want to add a non-espressif device? Use the example [python]() and [arduino]() clients.
 
 
