@@ -82,5 +82,5 @@ Check out the [Clod Sketch Library](https://github.com/jakeloggins/Clod-sketch-l
 
 Don't like the Crouton interface? Everything in Clod is managed by MQTT messages. Crouton is simply one of many ways to send and receive them. Familiarize yourself with the [data structure](https://github.com/jakeloggins/crouton-new/blob/master/example_of_objects.md) and make your own interface. 
 
-
+Want to add a non-espressif device? Use the example [python](https://github.com/jakeloggins/Clod-scripts/tree/master/clients/python) and [arduino](https://github.com/jakeloggins/Clod-scripts/tree/master/clients/non_esp_arduino_example_basic_blink) clients.
 
