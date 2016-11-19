@@ -51,6 +51,7 @@ Getting Started
   * All of the components installed, configured and running properly on your Raspberry Pi. 
   * An esp8266 chip loaded with the initial configuration script.
 
+![initial chip setup](path)
 
 * Point your browser to the Crouton landing page (default: http://192.168.1.160:8080).
 
@@ -60,6 +61,8 @@ Getting Started
 
 * Make a note of the information displayed on the screen.
 
+![upload sketch](path)
+
 * In Crouton, select the "Connections" tab.
 
 * In the "Upload" section, select the device from the available devices drop down and upload your desired sketch.
@@ -67,6 +70,8 @@ Getting Started
 * If the sketch uploaded successfully, you'll see a prompt at the bottom of the screen.
 
   * The prompt may display a link to assembly and configuration information unique to the sketch. If it does, follow the directions. 
+
+![add device](http://g.recordit.co/V1hMfKT0oC.gif)
 
 * Once successfully uploaded and configured, select the device from the "Devices" section and click add.
 

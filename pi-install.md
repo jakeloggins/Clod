@@ -121,9 +121,13 @@ If you're going to want to access your pi with SSH later or other advanced fiddl
 
 * ```sudo apt-get install -y nodejs```
 
-**Crouton**
+**Clod**
 
 * Go to the user home directory (default: home/clod)
+
+* ``` git clone https://github.com/jakeloggins/Clod-scripts.git ```
+
+* ``` git clone https://github.com/jakeloggins/Clod-sketch-library.git ```
 
 * ``` git clone https://github.com/jakeloggins/crouton-new.git ```
 
@@ -147,15 +151,12 @@ If you're going to want to access your pi with SSH later or other advanced fiddl
 
 * Go to the user home directory (default: home/clod)
 
-* ``` sudo pip install -U platformio
+* ``` sudo pip install -U platformio ```
 
 * ``` platformio platforms install espressif ```
 
 * Go to the .platformio directory (default: home/clod/.platformio)
 
-* ``` mkdir -m 777 lib ```
-
-* ``` cp -a ~/crouton-new/platformio_dependencies/. ~/.platformio/lib/ ```
 
 
 ### Mosquitto MQTT Broker
