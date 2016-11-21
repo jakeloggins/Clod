@@ -53,7 +53,7 @@ Getting Started
 
 * Point your browser to the Crouton landing page (default: http://192.168.1.160:8080).
 
-![initial chip setup](initial_setup.gif)
+![initial chip setup](initial_chip_setup.gif)
 
 * Turn on your esp8266 and connect to the wifi network "Clod" with a mobile device.
 
