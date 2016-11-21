@@ -53,7 +53,7 @@ Getting Started
 
 * Point your browser to the Crouton landing page (default: http://192.168.1.160:8080).
 
-![initial chip setup](http://g.recordit.co/7MyQabt7Qp.gif)
+![initial chip setup](initial_setup.gif)
 
 * Turn on your esp8266 and connect to the wifi network "Clod" with a mobile device.
 
@@ -63,19 +63,19 @@ Getting Started
 
 * Make a note of the information displayed on the screen.
 
-![upload sketch](http://g.recordit.co/hyEhkQ5ydc.gif)
+![upload sketch](upload_sketch.gif)
 
 * In Crouton, select the "Connections" tab.
 
 * In the "Upload" section, select the device from the available devices drop down and upload your desired sketch.
 
-![upload success](http://g.recordit.co/ftpFbjMDFq.gif)
+![upload success](upload_success.gif)
 
 * If the sketch uploaded successfully, you'll see a prompt at the bottom of the screen.
 
   * The prompt may display a link to assembly and configuration information unique to the sketch. If it does, follow the directions. 
 
-![add device](http://g.recordit.co/V1hMfKT0oC.gif)
+![add device](add_device.gif)
 
 * Once successfully uploaded and configured, select the device from the "Devices" section and click add.
 
