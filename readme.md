@@ -79,11 +79,9 @@ Getting Started
 
 * View information and controls from your device on the "Dashboard" tab.
 
-* You're done. Enjoy!
-
 >![add device](add_device.gif)
 
-
+* You're done. Enjoy!
 
 
 
