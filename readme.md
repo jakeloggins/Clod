@@ -51,21 +51,25 @@ Getting Started
   * All of the components installed, configured and running properly on your Raspberry Pi. 
   * An esp8266 chip loaded with the initial configuration script.
 
-![initial chip setup](path)
-
 * Point your browser to the Crouton landing page (default: http://192.168.1.160:8080).
+
+![initial chip setup](http://g.recordit.co/7MyQabt7Qp.gif)
 
 * Turn on your esp8266 and connect to the wifi network "Clod" with a mobile device.
 
 * Select your home wifi network's SSID from the list and enter the password.
 
+![completed setup](clod_screenshot.png)
+
 * Make a note of the information displayed on the screen.
 
-![upload sketch](path)
+![upload sketch](http://g.recordit.co/hyEhkQ5ydc.gif)
 
 * In Crouton, select the "Connections" tab.
 
 * In the "Upload" section, select the device from the available devices drop down and upload your desired sketch.
+
+![upload success](http://g.recordit.co/ftpFbjMDFq.gif)
 
 * If the sketch uploaded successfully, you'll see a prompt at the bottom of the screen.
 
