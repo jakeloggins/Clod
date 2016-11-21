@@ -57,29 +57,29 @@ Getting Started
 
 * Select your home wifi network's SSID from the list and enter the password.
 
->![initial chip setup](initial_chip_setup.gif)
+>![initial chip setup](img/initial_chip_setup.gif)
 
 * Make a note of the information displayed on the screen.
 
->![completed setup](clod_screenshot.png)
+>![completed setup](img/clod_screenshot.png)
 
 * In Crouton, select the "Connections" tab.
 
 * In the "Upload" section, select the device from the available devices drop down and upload your desired sketch.
 
->![upload sketch](upload_sketch.gif)
+>![upload sketch](img/upload_sketch.gif)
 
 * If the sketch uploaded successfully, you'll see a prompt at the bottom of the screen.
 
   * The prompt may display a link to assembly and configuration information unique to the sketch. If it does, follow the directions. 
 
->![upload success](upload_success.gif)
+>![upload success](img/upload_success.gif)
 
 * Once successfully uploaded and configured, select the device from the "Devices" section and click add.
 
 * View information and controls from your device on the "Dashboard" tab.
 
->![add device](add_device.gif)
+>![add device](img/add_device.gif)
 
 * You're done. Enjoy!
 
