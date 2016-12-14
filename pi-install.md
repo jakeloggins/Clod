@@ -14,23 +14,30 @@ This section will cover the initial setup of the Raspberry Pi, which will manage
 
 * Download the latest [Raspbian release](https://www.raspberrypi.org/downloads/raspbian/) and follow the [installation guide](https://www.raspberrypi.org/documentation/installation/installing-images/README.md).
 
-* After booting to desktop, set the appropriate location by clicking Menu > Raspberry Pi Configuration > Localisation
+* After booting to desktop, set the appropriate location by clicking Menu > Preferences > Raspberry Pi Configuration > Localisation
 
 * In that same section, also set the appropriate keyboard layout. Verify by pressing the "#" key and making sure a "#" symbol is displayed.
+
+* Still in that section, set the appropriate timezone.
+
+* Click ok and agree to the reboot.
 
 * Now open a terminal window. Menu > Accessories > Terminal. All future steps will be from the terminal window unless otherwise noted.
 
 
 ### Configure WiFi
 
-**From the root directory, check to make sure interfaces refers to wpa_supplicant:**
+**From the root directory, verify the interfaces file refers to wpa_supplicant:**
 ```
-sudo nano /etc/network/interfaces
+cd /
+sudo nano etc/network/interfaces
 ```
+
+**Assuming the reference to wpa_supplicant is there, exit the file by pressing CTRL+X**
 
 **Enter your ssid and password in wpa_supplicant:**
 ```
-sudo nano /etc/wpa_supplicant/wpa_supplicant.conf
+sudo nano etc/wpa_supplicant/wpa_supplicant.conf
 ```
 ```
 network={
@@ -40,9 +47,11 @@ network={
 }
 ```
 
+**Press CTRL+X, Y to save the file, and ENTER**
+
 **From the root directory and create a boot/wifilogin.json file**
 ```
-sudo nano /boot/wifilogin.json
+sudo nano boot/wifilogin.json
 ```
 ```
 {
@@ -50,26 +59,50 @@ sudo nano /boot/wifilogin.json
 	"password": "yourWifiPASSWORDHere"
 }
 ```
+**Note the comma after the SSID line**
+
+
+**Press CTRL+X, Y to save the file, and ENTER**
 
 **Edit etc/dhcpcd.conf:**
 ```
-sudo nano /etc/dhcpcd.conf
+sudo nano etc/dhcpcd.conf
 ```
+**Append the following to the bottom of the file:**
 
 ```
 interface eth0
-static ip_address=192.168.1.140/24
+static ip_address=192.168.1.160/24
 static routers=192.168.1.1
 static domain_name_servers=192.168.1.1 8.8.8.8
 
 interface wlan0
-static ip_address=192.168.1.140/24
+static ip_address=192.168.1.160/24
 static routers=192.168.1.1
 static domain_name_servers=192.168.1.1 8.8.8.8
 ```
+
+**Press CTRL+X, Y to save the file, and ENTER**
+
 **Now restart dhcpcd**
+
 ```
 sudo service dhcpcd restart
+```
+
+**Reboot**
+```
+sudo reboot
+```
+
+**Verify ip address was assigned correctly**
+```
+ifconfig wlan0
+```
+
+**Output should match what you entered in the dhcpcd.conf file (default: 192.168.1.160)**
+```
+inet addr:192.168.1.160 ...
 ```
 
 ### Change the username to something other than pi (default: clod)
@@ -80,17 +113,19 @@ sudo service dhcpcd restart
 
 * From the desktop rather than the terminal window, go to Menu > Preferences > Raspberry Pi Configuration
 
-* uncheck "auto login as pi"
+* uncheck `Auto login: Login as user 'pi'`
 
-* Menu > Reboot
+* Click OK and agree to reboot
 
-* Open a terminal window: Menu > Accessories > Terminal
+* Login by selecting 'Other' then enter user 'root' and the password you entered earlier (default: "!ClodMQTT!")
+
+* Open a terminal window (Menu > Accessories > Terminal) and enter the following:
 
 * ``` usermod -l clod pi ```
 
 * ``` usermod -m -d /home/clod clod
 
-* From the desktop, click Menu > Logout
+* From the desktop, click Menu > Shutdown > Logout
 
 * Enter your new username (default: clod) and "raspberry" as the password
 
@@ -98,7 +133,7 @@ sudo service dhcpcd restart
 
 * ``` passwd ``` - change the password to something better, the default used in the disk image is "!ClodMQTT!"
 
-* ``` sudo passwd -l root ``` - disables the root password
+* ``` sudo passwd -l root ``` - follow the prompts to disable the root password
 
 * ``` sudo groupmod -n clod pi ``` - change the group from pi to clod
 
@@ -115,7 +150,7 @@ If you're going to want to access your pi with SSH later or other advanced fiddl
 
 * Open a terminal window: Menu > Accessories > Terminal
 
-* Go to the root directory
+* Go to the root directory `cd /`
 
 * ```curl -sL https://deb.nodesource.com/setup_4.x | sudo -E bash -```
 
@@ -123,7 +158,7 @@ If you're going to want to access your pi with SSH later or other advanced fiddl
 
 **Clod**
 
-* Go to the user home directory (default: home/clod)
+* Go to the user home directory (default: home/clod) `cd home/clod`
 
 * ``` git clone https://github.com/jakeloggins/Clod-scripts.git ```
 
@@ -133,7 +168,7 @@ If you're going to want to access your pi with SSH later or other advanced fiddl
 
 **NPM**
 
-* Go to the Crouton folder
+* Go to the Crouton folder `cd crouton-new`
 
 * ``` sudo npm update ```
 
@@ -149,13 +184,11 @@ If you're going to want to access your pi with SSH later or other advanced fiddl
 
 **Platform Io**
 
-* Go to the user home directory (default: home/clod)
+* Go to the user home directory (default: home/clod) `cd ..`
 
 * ``` sudo pip install -U platformio ```
 
-* ``` platformio platforms install espressif ```
-
-* Go to the .platformio directory (default: home/clod/.platformio)
+* ``` platformio platforms install espressif8266 ```
 
 
 
@@ -163,7 +196,7 @@ If you're going to want to access your pi with SSH later or other advanced fiddl
 
 **Install**
 
-* Go to the root directory
+* Go to the root directory `cd /`
 
 * ```sudo wget http://repo.mosquitto.org/debian/mosquitto-repo.gpg.key ```
 
@@ -180,6 +213,8 @@ If you're going to want to access your pi with SSH later or other advanced fiddl
 * ``` sudo apt-get install mosquitto-clients python-mosquitto ```
 
 **Edit the configuration file**
+
+* ``` cd / ```
 
 * ``` sudo nano etc/mosquitto/mosquitto.conf ```
 
@@ -206,17 +241,21 @@ listener 9001
 protocol websockets
 ```
 
+**Press CTRL+X, Y to save the file, and ENTER**
+
 **Verify mosquitto is running properly**
 
 * ``` sudo service mosquitto restart ```
 
 * Open another terminal window: Menu > Accessories > Terminal
 
-* type ``` mosquitto_sub -t /# -v ``` in one window
+* enter ``` mosquitto_sub -t /# -v ``` in the new terminal window
 
-* type ``` mosquitto_pub -t /whatever -m "test" ``` in the other window
+* enter ``` mosquitto_pub -t /whatever -m "test" ``` in the other terminal window
 
 * you should now see ``` /whatever test ``` in the first window
+
+* close the new terminal window
 
 
 ### Setup Systemd
@@ -226,6 +265,11 @@ Systemd will make all of the Clod-scripts and the crouton dashboard run automati
 * Navigate to `/etc/systemd/system`
 
 * Create the following files, naming them ClodUploader.service, ClodScheduler.service, ClodPersistence.service, and ClodCrouton.service:
+
+	* `sudo nano ClodUploader.service` 
+	* `sudo nano ClodScheduler.service`
+	* `sudo nano ClodPersistence.service` 
+	* `sudo nano ClodCrouton.service`
 
 Example files:
 
@@ -307,8 +351,22 @@ WantedBy=default.target
 
 * `sudo chmod u+rwx` to all the files
 
+	* `sudo chmod u+rwx ClodUploader.service` 
+	* `sudo chmod u+rwx ClodScheduler.service`
+	* `sudo chmod u+rwx ClodPersistence.service` 
+	* `sudo chmod u+rwx ClodCrouton.service`
+
 * `sudo systemctl daemon-reload` - make systemd aware of changed files
 
+
+* Install Clod-scripts node modules
+	* Navigate to Clod-scripts directory
+	* `npm install jsonfile`
+	* `npm install mqtt`
+	* `npm install fs`
+	* `npm install later`
+	* `npm install util`
+	
 * `sudo systemctl enable ClodUploader.service`
 
 * `sudo systemctl enable ClodScheduler.service`
