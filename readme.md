@@ -1,6 +1,8 @@
 Clod
 ======
 
+[![Join the chat at https://gitter.im/ClodMQTT/Lobby](https://badges.gitter.im/ClodMQTT/Lobby.svg)](https://gitter.im/ClodMQTT/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 Clod is a system for easily deploying IoT devices based on espressif chips like the ESP8266. It is intended to be self-contained within the user's network, so that data and controls are private and isolated from the internet. Its components are a disorganized mess of other great open source software projects that together form a coherent user experience. A clod is a clump of dirt, which is the opposite of a stack, and as far as one can get from a cloud.
 
 The main components of Clod are:
