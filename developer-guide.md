@@ -52,12 +52,12 @@ Developer Guide
 
 
 Overall Flow and Purpose (new section)
-======================================
+--------------------------------------
 
 coming soon.	
 
 
-
+<!--
 How it Works
 ==============
 
@@ -68,7 +68,7 @@ After getting a device and a broker, we simply need to hook everything up. The b
 Being a distributed system, like the one shown above, connection between the device and Crouton is only via the MQTT Broker. The communication between Crouton and the device is defined by a protocol that utilizes addresses and MQTT's last will and testament (LWT) feature.
 
 Once Crouton and and the device are connected to the same MQTT Broker, we can use Crouton to initiate the connection to the device. The device will in turn send a JSON describing itself known as the deviceInfo to Crouton.
-
+-->
 
 
 
@@ -285,11 +285,11 @@ Device object example:
 
 **Note**: Both *device_name* and *endPoints* are required and must be unique to other *device_names* or *endPoints* respectively
 
-
+<!--
 ### Card Types
 
 Since Clod evolved from the Crouton dashboard, each endpoint must follow a Crouton card's payload format. For a full description of the available dashboard cards, go [here](https://github.com/jakeloggins/crouton-new#dashboard-cards). Most cards require sending a `values` object containing a single `value` key to the endpoint's topic. Some cards, such as the [Line Chart](https://github.com/jakeloggins/crouton-new#line-chart), have a more complicated `values` object.
-
+-->
 
 ### Updating Endpoints
 
@@ -394,7 +394,7 @@ Payload: anything
 
 
 
-[Crouton](https://github.com/jakeloggins/crouton-new)
+[Crouton Dashboard](https://github.com/jakeloggins/crouton-new)
 ================
 
 Crouton is a dashboard that lets you visualize and control your IOT devices with minimal setup. Essentially, it is the easiest dashboard to setup for any IOT hardware enthusiast using only MQTT and JSON.
@@ -563,6 +563,28 @@ Therefore the value shown on Crouton more accurately reflects the value on the d
 Address: /[path]/confirm/[device name]/[endpoint name]
 Payload: {"value": "some new value here"}
 ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 Dashboard Cards
@@ -1367,9 +1389,6 @@ The scheduler connects to the MQTT broker from the information stored in the /pu
 
 
 
-
-
-Clod Sketch Library
 
 
 Clod Sketch Library
