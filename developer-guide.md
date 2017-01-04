@@ -54,21 +54,21 @@ Developer Guide
 Overall Flow and Purpose (new section)
 --------------------------------------
 
-coming soon.	
+Clod is an open source control system for espressif chip projects. Clod does not connect to the cloud and is not meant to interface with commerical IoT devices. Commercial, cloud-dependent IoT devices are too expensive and generally a [bad idea](https://twitter.com/internetofshit). The system is designed for makers who want to quickly create something cheap and control it, and for those without programming or electrical experience who want to follow a simple tutorial. This advanced guide is to help developers understand the overall Clod system and learn how to create and share projects.
 
+The intended use case of Clod is some espressif chips, programmed in arduino, communicating over MQTT to a Raspberry Pi. The user will send commands or view data from the chips through MQTT messages or an optional web dashboard. The MQTT broker, web dashboard, and other administrative node scripts are all contained on the Raspberry Pi. Clod is intended to stay behind a LAN and not connect to the broader internet. 
 
-<!--
-How it Works
-==============
+insert diagram here
 
-After getting a device and a broker, we simply need to hook everything up. The beauty of Crouton is that, like the device, *Crouton is also a client to the same MQTT Broker.* As a result, Crouton does not rely on any additional centralized server than does your MQTT device. In fact, Crouton is purely a frontend application with no backend services.
+However, not everyone wants to follow the intended use. Thus, the project is split into separate components to make it easy to customize and understand. These are:
 
-![MQTT diagram with Crouton and devices](https://raw.githubusercontent.com/jakeloggins/crouton-new/master/public/common/images/mqtt.png)
+* Clod MQTT Standard - a common syntax designed for console readability
 
-Being a distributed system, like the one shown above, connection between the device and Crouton is only via the MQTT Broker. The communication between Crouton and the device is defined by a protocol that utilizes addresses and MQTT's last will and testament (LWT) feature.
+* Crouton Dashboard - a web dashboard featuring various buttons, toggles, graphs, and menus. Helps with additional functionality such as OTA uploading and scheduling.
 
-Once Crouton and and the device are connected to the same MQTT Broker, we can use Crouton to initiate the connection to the device. The device will in turn send a JSON describing itself known as the deviceInfo to Crouton.
--->
+* Clod Scripts - a series of node scripts that listen to MQTT traffic and assist with features such as initial configuration, device persistence, OTA uploading, and scheduling.
+
+* Clod Sketch Library - Arduino sketch templates that allow users to easily customize, replicate, and share projects.
 
 
 
