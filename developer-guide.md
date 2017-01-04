@@ -58,7 +58,7 @@ Clod is an open source control system for espressif chip projects. Clod does not
 
 The intended use case of Clod is some espressif chips, programmed in arduino, communicating over MQTT to a Raspberry Pi. The user will send commands or view data from the chips through MQTT messages or an optional web dashboard. The MQTT broker (mosquitto), web dashboard, and other administrative node scripts are all contained on the Raspberry Pi. Clod is intended to stay behind a LAN and not connect to the broader internet. 
 
-However, not everyone wants to follow the intended use. Thus, the project is split into separate components to make it easy to customize and understand. These are:
+However, not everyone will follow the intended use. Thus, the project is split into separate components to make it easy to customize and understand. These are:
 
 * Clod MQTT Standard - a common syntax designed for console readability
 
@@ -69,7 +69,7 @@ However, not everyone wants to follow the intended use. Thus, the project is spl
 * Clod Sketch Library - Arduino sketch templates that allow users to easily customize, replicate, and share projects.
 
 
-![User-flow-chart](https://raw.githubusercontent.com/jakeloggins/Clod/master/img/complete_flow_2.png)
+![User-flow-chart](https://raw.githubusercontent.com/jakeloggins/Clod/master/img/complete_flow.png)
 
 
 
