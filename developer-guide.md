@@ -68,6 +68,7 @@ However, not everyone will follow the intended use. Thus, the project is split i
 
 * Clod Sketch Library - Arduino sketch templates that allow users to easily customize, replicate, and share projects.
 
+Here's a chart showing how everything is intended to fit together:
 
 ![User-flow-chart](https://raw.githubusercontent.com/jakeloggins/Clod/master/img/complete_flow.png)
 
@@ -123,8 +124,7 @@ An MQTT standard is just an agreed way to format the topic and payload so that u
 * Can integrate seamlessly with third party services (slack chat, text message, twitter, etc)
 
 
-Topic Format
-------------
+#### Topic Format
 
 The Clod MQTT topic format is:
 
@@ -144,9 +144,9 @@ All together, that would look like this:
 ` /house/upstairs/guestroom/control/myEspDevice/temperature `
 
 
-### Location based path
+##### Location based path
 
-The intended use for Clod is multiple espressif-based IoT devices throughout the home. If a user has only one device, any topic format will do. But with multiple devices, location based topic paths offer the following advantages:
+If a user has only one device, any topic format will do. But with multiple devices, location based topic paths offer the following advantages:
 
 * A more intuitive experience when viewing a raw stream of messages on the broker. The path tells you the location and the command describes what is happening. The output gets more detailed as you read from left to right.
 
@@ -159,7 +159,7 @@ Any number of user-defined combinations are allowed. For example, `/house/upstai
 **Note**: The user is free to not use location based paths by simply assigning the same path to each each device, like `/default` or `/house`. 
 
 
-### Command
+##### Command
 
 There are four commands: control, confirm, errors, and log. Clod first uses the command to parse the topic. Once Clod recognizes the command, it reads everything to the left of it as part of the `[path]`, and everything to the right as the `[name]` and `[endpoint]`.
 
@@ -172,12 +172,12 @@ There are four commands: control, confirm, errors, and log. Clod first uses the 
 * The log command currently does nothing, but is reserved for future use. `[path]/log/[name]` 
 
 
-### Name
+##### Name
 
 Device names are provided by the user during the upload process and/or hardcoded into the sketch. Spaces in the name are allowed, but will be converted to [camelCase](https://en.wikipedia.org/wiki/CamelCase) and assigned to device_name_key in the device object. More information about device objects are provided below.
 
 
-### Endpoint
+##### Endpoint
 
 A device can have multiple endpoints. Each endpoint represents a dashboard card that will be displayed for the user to control or view data from the device.
 
@@ -197,9 +197,9 @@ Payload: {"value": "some new value here"}
 ```
 
 
-### Startup and Scripts
+##### Startup and Scripts
 
-Most routine communication between the user and devices are covered by the proceeding sections. However, a device's initial connection and use of the Clod Scripts require special topic formatting. This section simply notes the topic syntax for these processes. For an in-depth look at how these work and what they do, read the [walkthrough](https://github.com/jakeloggins/Clod-scripts). 
+Most routine communication between the user and devices are covered by the proceeding sections. However, a device's initial connection and use of the Clod Scripts require special topic formatting. This section simply notes the topic syntax for these processes. A more in-depth guide is featured below.
 
  * deviceInfo is where information about the device is exchanged between the user, devices, and Clod. 
    * ` /deviceInfo/[command]/[name] `
@@ -214,16 +214,17 @@ Most routine communication between the user and devices are covered by the proce
    * ` /uploader/[command]/name `
 
  * the scheduler sends normal control commands to endpoints at specified times. 
-   * ` /scheduler/[path]/[action type]/[name]/[endpoint]/[value] ` (Again, see the [walkthrough](https://github.com/jakeloggins/Clod-scripts#action-types-and-values) for more details)
+   * ` /scheduler/[path]/[action type]/[name]/[endpoint]/[value] `
 
 
 
-Payload Format
---------------
+#### Payload Format
 
-### Device Objects
+The payload format is simply an object, depending on the following contexts. 
 
-All of a device's information that is required by Clod can be found in its device object. For more information on how the device object changes during a device's life cycle, see the [walkthrough](https://github.com/jakeloggins/Clod-scripts). The device object is sent to `/deviceInfo/` whenever a user adds a device to the Crouton dashboard, a new sketch is uploaded, or after loss of connection to the MQTT broker. The device object is the primary method for Crouton to understand the device. It is the first message the device will send to Crouton to establish connection and also the message that describes the device and values to Crouton. 
+##### Device Objects
+
+All of a device's information that is required by Clod can be found in its device object. The device object is sent to `/deviceInfo/` whenever a user adds a device to the Crouton dashboard, a new sketch is uploaded, or after loss of connection to the MQTT broker. The device object is the primary method for Crouton to understand the device. It is the first message the device will send to Crouton to establish connection and also the message that describes the device and values to Crouton. 
 
 Device object example:
 
@@ -287,7 +288,7 @@ Device object example:
 Since Clod evolved from the Crouton dashboard, each endpoint must follow a Crouton card's payload format. For a full description of the available dashboard cards, go [here](https://github.com/jakeloggins/crouton-new#dashboard-cards). Most cards require sending a `values` object containing a single `value` key to the endpoint's topic. Some cards, such as the [Line Chart](https://github.com/jakeloggins/crouton-new#line-chart), have a more complicated `values` object.
 -->
 
-### Updating Endpoints
+##### Updating Endpoints
 
 Updates to endpoints can come from user or the device. The message payload will be a object that updates the value. This object will be equivalent to the object of the key `values` within each endpoint. 
 
@@ -323,7 +324,7 @@ Address: /[path]/confirm/Kroobar/barDoor
 Payload: {"value": 35}
 ```
 
-### Last will and testament (LWT)
+##### Last will and testament (LWT)
 
 In order for Crouton to know when the device has unexpectedly disconnected, the device must create a LWT with the MQTT Broker. This a predefined broadcast that the broker will publish on the device's behalf when the device disconnects. The payload in this case can be anything as long as the address is correct.
 
@@ -393,14 +394,14 @@ Payload: anything
 [Crouton Dashboard](https://github.com/jakeloggins/crouton-new)
 ================
 
-Crouton is a dashboard that lets you visualize and control your IOT devices with minimal setup. Essentially, it is the easiest dashboard to setup for any IOT hardware enthusiast using only MQTT and JSON.
+Crouton is a dashboard that lets you visualize and control your IOT devices with minimal setup. Essentially, it is the easiest dashboard to setup for any IoT hardware enthusiast using only MQTT and JSON.
 
 
 
 Connecting to Crouton
 --------------
 
-First, have Crouton and the device connected to the same MQTT Broker. The connection between the device and Crouton will be initiated from Crouton, therefore the device needs to subscribe to its own inbox.
+First, have Crouton and the device connected to the same MQTT Broker. The connection between the device and Crouton will be initiated from Crouton, therefore the device needs to subscribe to its own path.
 
 ```
 Device should subscribe to the following:
@@ -415,6 +416,8 @@ Device should publish deviceInfo JSON once connected
 ```
 
 ### DeviceInfo
+
+<!-- This might not be true anymore with persistence -->
 
 The deviceInfo is the primary method for Crouton to understand the device. It is the first message the device will send to Crouton to establish connection and also the message that describes the device and values to Crouton. The primary object is *deviceInfo*. Within *deviceInfo* there are several keys as follows:
 
@@ -927,13 +930,14 @@ Example:
 
 
 
-Transition here between here is the interface and how it works, but you can also make your own, here's the overview with Clod Scripts walkthrough
+<!--Transition here between here is the interface and how it works, but you can also make your own, here's the overview with Clod Scripts walkthrough-->
+
 
 
 Clod Scripts Walkthrough
 ==============
 
-This section explains the behavior of the Clod scripts as an esp chip is added to the system and a user performs typical interactions with it. **If you just want to use Clod, you don't need to read this section.** This is intended for developers who want to improve the codebase, contribute to the sketch library, create their own GUI, or integrate Clod with 3rd party services.
+This section explains the behavior of the Clod scripts as an esp chip is added to the system and a user performs typical interactions with it.
 
 
 Init_Config
