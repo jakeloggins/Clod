@@ -144,7 +144,7 @@ All together, that would look like this:
 ` /house/upstairs/guestroom/control/myEspDevice/temperature `
 
 
-##### Location based path
+**Location based path**
 
 If a user has only one device, any topic format will do. But with multiple devices, location based topic paths offer the following advantages:
 
@@ -156,10 +156,10 @@ If a user has only one device, any topic format will do. But with multiple devic
 
 Any number of user-defined combinations are allowed. For example, `/house/upstairs/ ` or ` /house/upstairs/guestroom/closet/storagebox/shoebox/russian-nesting-dolls/large/medium/small ` are both perfectly fine location paths. First, they are descriptive and helpful to the user. Second, they get more specific and limiting as read from left to right. 
 
-**Note**: The user is free to not use location based paths by simply assigning the same path to each each device, like `/default` or `/house`. 
+Note: The user is free to not use location based paths by simply assigning the same path to each each device, like `/default` or `/house`. 
 
 
-##### Command
+**Command**
 
 There are four commands: control, confirm, errors, and log. Clod first uses the command to parse the topic. Once Clod recognizes the command, it reads everything to the left of it as part of the `[path]`, and everything to the right as the `[name]` and `[endpoint]`.
 
@@ -172,12 +172,12 @@ There are four commands: control, confirm, errors, and log. Clod first uses the 
 * The log command currently does nothing, but is reserved for future use. `[path]/log/[name]` 
 
 
-##### Name
+**Name**
 
 Device names are provided by the user during the upload process and/or hardcoded into the sketch. Spaces in the name are allowed, but will be converted to [camelCase](https://en.wikipedia.org/wiki/CamelCase) and assigned to device_name_key in the device object. More information about device objects are provided below.
 
 
-##### Endpoint
+**Endpoint**
 
 A device can have multiple endpoints. Each endpoint represents a dashboard card that will be displayed for the user to control or view data from the device.
 
@@ -197,7 +197,7 @@ Payload: {"value": "some new value here"}
 ```
 
 
-##### Startup and Scripts
+**Startup and Scripts**
 
 Most routine communication between the user and devices are covered by the proceeding sections. However, a device's initial connection and use of the Clod Scripts require special topic formatting. This section simply notes the topic syntax for these processes. A more in-depth guide is featured below.
 
@@ -222,7 +222,7 @@ Most routine communication between the user and devices are covered by the proce
 
 The payload format is simply an object, depending on the following contexts. 
 
-##### Device Objects
+**Device Objects**
 
 All of a device's information that is required by Clod can be found in its device object. The device object is sent to `/deviceInfo/` whenever a user adds a device to the Crouton dashboard, a new sketch is uploaded, or after loss of connection to the MQTT broker. The device object is the primary method for Crouton to understand the device. It is the first message the device will send to Crouton to establish connection and also the message that describes the device and values to Crouton. 
 
@@ -280,7 +280,7 @@ Device object example:
 * *card-type*: How data should be displayed from the endpoint on the dashboard. See next section.
 * *description*: A string that describes the device (for display to user only)
 
-**Note**: Both *device_name* and *endPoints* are required and must be unique to other *device_names* or *endPoints* respectively
+Note: Both *device_name* and *endPoints* are required and must be unique to other *device_names* or *endPoints* respectively
 
 <!--
 ### Card Types
@@ -288,7 +288,7 @@ Device object example:
 Since Clod evolved from the Crouton dashboard, each endpoint must follow a Crouton card's payload format. For a full description of the available dashboard cards, go [here](https://github.com/jakeloggins/crouton-new#dashboard-cards). Most cards require sending a `values` object containing a single `value` key to the endpoint's topic. Some cards, such as the [Line Chart](https://github.com/jakeloggins/crouton-new#line-chart), have a more complicated `values` object.
 -->
 
-##### Updating Endpoints
+**Updating Endpoints**
 
 Updates to endpoints can come from user or the device. The message payload will be a object that updates the value. This object will be equivalent to the object of the key `values` within each endpoint. 
 
@@ -306,7 +306,7 @@ An entry in endPoints:
 }
 ```
 
-##### From User
+**From User**
 
 The user has the ability to update the value of the device's endpoints via certain dashboard cards. Therefore the device needs to be subscribe to all of its endpoint topics. The payload from the user is in the same format as the one coming from the device.
 
@@ -315,7 +315,7 @@ Address: /[path]/control/Kroobar/barDoor
 Payload: {"value": 35}
 ```
 
-##### From Device
+**From Device**
 
 To update values on the dashboard from the device, simply publish messages to the `confirm` of the endPoint which Crouton is already subscribed to. The payload is just the same as the one coming from Crouton.
 
@@ -324,7 +324,7 @@ Address: /[path]/confirm/Kroobar/barDoor
 Payload: {"value": 35}
 ```
 
-##### Last will and testament (LWT)
+**Last will and testament (LWT)**
 
 In order for Crouton to know when the device has unexpectedly disconnected, the device must create a LWT with the MQTT Broker. This a predefined broadcast that the broker will publish on the device's behalf when the device disconnects. The payload in this case can be anything as long as the address is correct.
 
