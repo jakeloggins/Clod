@@ -663,7 +663,7 @@ Example:
 }
 ```
 
-**Simple Button**
+##### Simple Button
 
 ![Crouton-simple-text](https://raw.githubusercontent.com/jakeloggins/crouton-new/master/public/common/images/crouton-simple-button.png) </br> Simple button is one directional, sending a signal (with no meaningful value) from Crouton to the device. However, this is still a bi-directional card because the button is only enable if value is *true*. If the device updates the value of the card to *false*, the button will be disabled.
 
@@ -684,7 +684,7 @@ Example:
 }
 ```
 
-**Simple Toggle**
+#### Simple Toggle
 
 ![Crouton-simple-text](https://raw.githubusercontent.com/jakeloggins/crouton-new/master/public/common/images/crouton-simple-toggle.png) </br> Simple toggle allows a boolean value to be changed by both Crouton and the device. In the larger value display, priority for display is icon, labels, boolean text. If no labels or icons are given, the words true and false will be used. The labels around the toggle is only defined by *labels* object.
 
@@ -1552,7 +1552,7 @@ payload: "every night at 6pm"
 * *slide_above*: Moves a Simple Slider card to the value, unless the current value is higher.
 * *slide_below*: Moves a Simple Slider card to the value, unless the current value is lower.
 
-**Note**: slide_above and slide_below are not yet supported.
+Note: slide_above and slide_below are not yet supported.
 
 ### Removing Schedules
 * *clear*: deletes a previously created schedule.
@@ -1567,7 +1567,7 @@ To delete all active schedules send a message to:
 /schedule/clearall
 ```
 
-**Note**: If you use the scheduler, you cannot use any of the action type keywords in a path, device_name, or endpoints.
+Note: If you use the scheduler, you cannot use any of the action type keywords in a path, device_name, or endpoints.
 
 ### Dashboard Interface
 The schedule page is a more visual way to add, edit, or delete schedules. Currently active schedules will always be displayed above the form. You can only set one schedule per endpoint, to edit/overwrite an existing schedule, re-enter it by using the form.
@@ -1583,7 +1583,7 @@ Plain language schedules are parsed using later.js. A complete guide to text par
 ### Schedule Objects
 You can also place your own JSON schedules in the message payload. Later.js has a complete guide to forming schedule objects [here](http://bunkat.github.io/later/schedules.html).
 
-**Note**: Later.js is listed as a dependency in the bower file. You will not have to install it separately.
+Note: Later.js is listed as a dependency in the bower file. You will not have to install it separately.
 
 ### Stored JSON files
 Active schedules are stored in the /public/common/schedule_data.json file to resume normally after system restart and to allow for direct editing. You can also directly edit schedule objects in this file, but must restart the scheduler for them to take effect. 
