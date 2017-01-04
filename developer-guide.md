@@ -51,10 +51,10 @@ Developer Guide
 
 
 
-Overall Flow and Purpose (new section)
---------------------------------------
+Overall Flow and Purpose
+------------------------
 
-Clod is an open source control system for espressif chip projects. Clod does not connect to the cloud and is not meant to interface with commerical IoT devices. Commercial, cloud-dependent IoT devices are too expensive and generally a [bad idea](https://twitter.com/internetofshit). The system is designed for makers who want to quickly create something cheap and control it, and for those without programming or electrical experience who want to follow a simple tutorial. This advanced guide is to help developers understand the overall Clod system and learn how to create and share projects.
+Clod is an open source control system for espressif chip projects. Clod does not connect to the cloud and is not meant to interface with commerical IoT devices. Commercial, cloud-dependent IoT devices are too expensive and generally a [bad idea](https://twitter.com/internetofshit). The system is designed for makers who want to quickly create something cheap and control it, and for those without programming or electrical experience who want to follow a simple tutorial. This advanced guide is to help developers learn how to create and share projects.
 
 The intended use case of Clod is some espressif chips, programmed in arduino, communicating over MQTT to a Raspberry Pi. The user will send commands or view data from the chips through MQTT messages or an optional web dashboard. The MQTT broker, web dashboard, and other administrative node scripts are all contained on the Raspberry Pi. Clod is intended to stay behind a LAN and not connect to the broader internet. 
 
@@ -68,9 +68,6 @@ However, not everyone wants to follow the intended use. Thus, the project is spl
 
 * Clod Sketch Library - Arduino sketch templates that allow users to easily customize, replicate, and share projects.
 
-
-
-insert diagram here
 
 ![User-flow-chart](https://raw.githubusercontent.com/jakeloggins/Clod/master/img/user_flow.png)
 
