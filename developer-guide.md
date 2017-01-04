@@ -93,7 +93,7 @@ All together, that would look like this:
 ` /house/upstairs/guestroom/control/myEspDevice/temperature `
 
 
-**Location based path**
+#### Location based path
 
 If a user has only one device, any topic format will do. But with multiple devices, location based topic paths offer the following advantages:
 
@@ -108,7 +108,7 @@ Any number of user-defined combinations are allowed. For example, `/house/upstai
 Note: The user is free to not use location based paths by simply assigning the same path to each each device, like `/default` or `/house`. 
 
 
-**Command**
+#### Command
 
 There are four commands: control, confirm, errors, and log. Clod first uses the command to parse the topic. Once Clod recognizes the command, it reads everything to the left of it as part of the `[path]`, and everything to the right as the `[name]` and `[endpoint]`.
 
@@ -121,12 +121,12 @@ There are four commands: control, confirm, errors, and log. Clod first uses the 
 * The log command currently does nothing, but is reserved for future use. `[path]/log/[name]` 
 
 
-**Name**
+#### Name
 
 Device names are provided by the user during the upload process and/or hardcoded into the sketch. Spaces in the name are allowed, but will be converted to [camelCase](https://en.wikipedia.org/wiki/CamelCase) and assigned to device_name_key in the device object. More information about device objects are provided below.
 
 
-**Endpoint**
+#### Endpoint
 
 A device can have multiple endpoints. Each endpoint represents a dashboard card that will be displayed for the user to control or view data from the device.
 
@@ -146,7 +146,7 @@ Payload: {"value": "some new value here"}
 ```
 
 
-**Startup and Scripts**
+#### Startup and Scripts
 
 Most routine communication between the user and devices are covered by the proceeding sections. However, a device's initial connection and use of the Clod Scripts require special topic formatting. This section simply notes the topic syntax for these processes. A more in-depth guide is featured below.
 
@@ -171,7 +171,7 @@ Most routine communication between the user and devices are covered by the proce
 
 The payload format is simply an object, depending on the following contexts. 
 
-**Device Objects**
+#### Device Objects
 
 All of a device's information that is required by Clod can be found in its device object. The device object is sent to `/deviceInfo/` whenever a user adds a device to the Crouton dashboard, a new sketch is uploaded, or after loss of connection to the MQTT broker. The device object is the primary method for Crouton to understand the device. It is the first message the device will send to Crouton to establish connection and also the message that describes the device and values to Crouton. 
 
@@ -237,7 +237,7 @@ Note: Both *device_name* and *endPoints* are required and must be unique to othe
 Since Clod evolved from the Crouton dashboard, each endpoint must follow a Crouton card's payload format. For a full description of the available dashboard cards, go [here](https://github.com/jakeloggins/crouton-new#dashboard-cards). Most cards require sending a `values` object containing a single `value` key to the endpoint's topic. Some cards, such as the [Line Chart](https://github.com/jakeloggins/crouton-new#line-chart), have a more complicated `values` object.
 -->
 
-**Updating Endpoints**
+### Updating Endpoints
 
 Updates to endpoints can come from user or the device. The message payload will be a object that updates the value. This object will be equivalent to the object of the key `values` within each endpoint. 
 
@@ -255,7 +255,7 @@ An entry in endPoints:
 }
 ```
 
-**From User**
+#### From User
 
 The user has the ability to update the value of the device's endpoints via certain dashboard cards. Therefore the device needs to be subscribe to all of its endpoint topics. The payload from the user is in the same format as the one coming from the device.
 
@@ -264,7 +264,7 @@ Address: /[path]/control/Kroobar/barDoor
 Payload: {"value": 35}
 ```
 
-**From Device**
+#### From Device
 
 To update values on the dashboard from the device, simply publish messages to the `confirm` of the endPoint which Crouton is already subscribed to. The payload is just the same as the one coming from Crouton.
 
@@ -273,7 +273,7 @@ Address: /[path]/confirm/Kroobar/barDoor
 Payload: {"value": 35}
 ```
 
-**Last will and testament (LWT)**
+#### Last will and testament (LWT)
 
 In order for Crouton to know when the device has unexpectedly disconnected, the device must create a LWT with the MQTT Broker. This a predefined broadcast that the broker will publish on the device's behalf when the device disconnects. The payload in this case can be anything as long as the address is correct.
 
@@ -364,7 +364,7 @@ Device should publish deviceInfo JSON once connected
 /deviceInfo/[the device name]/confirm
 ```
 
-**DeviceInfo**
+#### DeviceInfo
 
 <!-- This might not be true anymore with persistence -->
 
@@ -420,7 +420,7 @@ Note: Both *device_name* and *endPoints* are required and must be unique to othe
 **Note**: There is now an additional method for adding and altering single card devices, discussed below. If you have multiple cards and store the deviceInfo JSON in your script, simply select "Auto Import" and type in the device name to add to the dashboard.
 -->
 
-**Addresses**
+#### Addresses
 
 Addresses are what Crouton and the device will publish and subscribe to. They are also critical in making the communication between Crouton and the devices accurate therefore there is a structure they should follow.
 
@@ -446,6 +446,8 @@ ex: /house/downstairs/kitchen
 
 Note: All addresses must be unique to one MQTT Broker. Therefore issues could be encounter when using public brokers where there are naming conflicts.
 
+<!-- this is repetitive from the previous section -->
+
 ### Updating device values
 
 Updating device values can come from Crouton or the device. The message payload will be a JSON that updates the value. This JSON will be equivalent to the object of the key *values* within each endPoint. However, only values that are being updated needs to be updated. All other values must be updated by the deviceInfo JSON.
@@ -465,7 +467,7 @@ An entry in endPoints:
 }
 ```
 
-**From Crouton**
+#### From Crouton
 
 Crouton has the ability to update the value of the device's endPoints via certain dashboard cards. Therefore the device needs to be subscribe to certain addresses detailed in the Endpoints section below. The payload from Crouton is in the same format as the one coming from the device.
 
@@ -474,7 +476,7 @@ Address: /[path]/control/Kroobar/barDoor
 Payload: {"value": 35}
 ```
 
-**From Device**
+#### From Device
 
 To update values on Crouton from the device, simply publish messages to the outbox of the endPoint which Crouton is already subscribed to. The payload is just the same as the one coming from Crouton.
 
@@ -483,7 +485,7 @@ Address: /[path]/confirm/Kroobar/barDoor
 Payload: {"value": 35}
 ```
 
-**Last will and testament (LWT)**
+#### Last will and testament (LWT)
 
 In order for Crouton to know when the device has unexpectedly disconnected, the device must create a LWT with the MQTT Broker. This a predefined broadcast that the broker will publish on the device's behalf when the device disconnects. The payload in this case can be anything as long as the address is correct.
 
@@ -492,7 +494,7 @@ Address: /[path]/errors/Kroobar
 Payload: anything
 ```
 
-**Endpoints**
+#### Endpoints
 
 A device can have multiple endPoints. Each endPoint represents a dashboard card that will be displayed on the dashboard.
 
@@ -642,7 +644,7 @@ Example:
 }
 ```
 
-**Simple Slider**
+#### Simple Slider
 
 ![Crouton-simple-text](https://raw.githubusercontent.com/jakeloggins/crouton-new/master/public/common/images/crouton-simple-slider.png) </br> Simple slider allows the user to select continuous values within a given range. Both the large number and the slider will attempt the give the real device value at all times except when the user is sliding.
 
@@ -663,7 +665,7 @@ Example:
 }
 ```
 
-##### Simple Button
+#### Simple Button
 
 ![Crouton-simple-text](https://raw.githubusercontent.com/jakeloggins/crouton-new/master/public/common/images/crouton-simple-button.png) </br> Simple button is one directional, sending a signal (with no meaningful value) from Crouton to the device. However, this is still a bi-directional card because the button is only enable if value is *true*. If the device updates the value of the card to *false*, the button will be disabled.
 
@@ -715,7 +717,7 @@ Example:
 
 These cards are for charts!
 
-**Donut Chart**
+####Donut Chart
 
 ![Crouton-chart-donut-1](https://raw.githubusercontent.com/jakeloggins/crouton-new/master/public/common/images/crouton-chart-donut-1.png)
 
@@ -751,7 +753,7 @@ Example:
 }
 ```
 
-**Line Chart**
+#### Line Chart
 
 ![Crouton-chart-line](https://raw.githubusercontent.com/jakeloggins/crouton-new/master/public/common/images/crouton-chart-line.png)
 
@@ -806,7 +808,7 @@ To update temperature:
 
 These cards are a little bit more specific to certain applications.
 
-**RGB Slider**
+####RGB Slider
 
 ![Crouton-rgb-slider](https://raw.githubusercontent.com/jakeloggins/crouton-new/master/public/common/images/crouton-rgb-slider.png) </br> RGB slider is three combined slider for the specific application of controlling a RGB led. Prepopulate the values for red, green and blue by setting in values.
 
@@ -1021,7 +1023,7 @@ The persistence script is the workhorse of the Clod system. It listens to MQTT t
 * Maintain all_devices.json, active_device_list.json, active_init_list.json, and active_device_list_esp.json
 
 
-**ESP chip after upload**
+#### ESP chip after upload
 
 1. Persistence adds a newly uploaded device to all_devices as seen in the `esp-uploaded-example` device object below and to the active device lists. 
 
@@ -1126,7 +1128,7 @@ Here's what all_devices.json looks like with two device objects:
 ```
 
 
-**List of Currently Connected Devices**
+#### List of Currently Connected Devices
 
 Persistence keeps a running list of all_devices who have a device_status of "connected" ...
 
@@ -1139,7 +1141,7 @@ active_device_list_esp:
 ``` ["esp-uploaded-example"] ```
 
 
-**Remembering States**
+#### Remembering States
 
 Within Clod, when a user sends a device a command, a MQTT message is sent to the ` /[path]/control/[name]/[endpoint] ` topic. All devices receive the command, do whatever they are programmed to do, and then return the message to the `/[path]/confirm/[name]/[endpoint] ` topic. Persistence listens and stores all messages that come in on the confirm topics. Persistence is always available to reply to devices requesting their last known states, whether during the startup process or any other reason. It will reply by sending a message to every endpoint's control topic. 
 
@@ -1156,7 +1158,7 @@ Within Clod, when a user sends a device a command, a MQTT message is sent to the
 * If the user wasn't around when the device was interrupted, it will have no idea that this persistence bit happened. The switch is just `on` as intended.
 
 
-**ESP Startup Process**
+#### ESP Startup Process
 
 1. On startup, esp devices ask persistence for its states by publishing to ``` /persistence/control/[name] "request states" ```. 
 
@@ -1171,7 +1173,7 @@ Within Clod, when a user sends a device a command, a MQTT message is sent to the
 5. If the esp disconnects from the MQTT broker or loses power, this process will repeat.
 
 
-**Non-ESP Startup Process**
+#### Non-ESP Startup Process
 
 1. On startup, devices ask persistence for its states by publishing to ``` /persistence/control/[name] "request states" ```. 
 
@@ -1186,7 +1188,7 @@ Within Clod, when a user sends a device a command, a MQTT message is sent to the
 5. If the device disconnects from the MQTT broker or loses power, this process will repeat.
 
 
-**IP Verification**
+#### IP Verification
 
 The uploader script needs to know the device's IP address to function properly. Therefore, every time a device restarts or re-connects to the MQTT broker, it should verify the IP address stored in all_devices is accurate.
 
@@ -1199,7 +1201,7 @@ The uploader script needs to know the device's IP address to function properly. 
   * Return ` /persistence/confirm/[name]/ip "192.168.1.99" ` if IP did not match.
 
 
-**LWT messages**
+#### LWT messages
 
 Devices should be programmed to send an LWT message to ` /[location path]/errors/[name] `. Persistence will mark the device as disconnected within all_devices and remove it from the active lists. Depending on the circumstances, persistence may also delete the device from all_devices.
 
@@ -1244,7 +1246,7 @@ example schedule_data:
 ```
 
 
-**Command Syntax**
+#### Command Syntax
 On recepit of a message to /schedule/#, the scheduler gets information about the endpoint from the rest of the message topic, and parses the message payload to create the schedule. The example message will ask the scheduler to lock the "backDoorLock" endpoint every night at 6pm. To change it to every night at 7pm, simply send another message to the same topic with a payload of "every night at 7pm."
 ```
 /schedule/[path]/[action type]/[device name]/[endPoint name]/[value]
@@ -1264,7 +1266,7 @@ payload: "every night at 6pm"
 
 Note: slide_above and slide_below are not yet supported.
 
-**Removing Schedules**
+#### Removing Schedules
 * *clear*: deletes a previously created schedule.
 * *clearall*: deletes all active schedules. Should be sent to /schedule/clearall/ topic.
 
@@ -1279,18 +1281,18 @@ To delete all active schedules send a message to:
 
 Note: If you use the scheduler, you cannot use any of the action type keywords in a path, device_name, or endpoints.
 
-**Dashboard Interface**
+#### Dashboard Interface
 The schedule page is a more visual way to add, edit, or delete schedules. Currently active schedules will always be displayed above the form. You can only set one schedule per endpoint, to edit/overwrite an existing schedule, re-enter it by using the form.
 
 If an endpoint was added earlier from the dashboard on the connections page, it's name is the card title converted to camelCase. It's good practice to name all of your endpoints in camelCase.
 
 Note: The dashboard interface doesn't do anything more than format and send a message to the scheduler. 
 
-**Plain Language Parsing**
+#### Plain Language Parsing
 
 Plain language schedules are parsed using later.js. A complete guide to text parsing can be found [here](http://bunkat.github.io/later/parsers.html#text).
 
-**Schedule Objects**
+#### Schedule Objects
 You can also place your own JSON schedules in the message payload. Later.js has a complete guide to forming schedule objects [here](http://bunkat.github.io/later/schedules.html).
 
 Note: Later.js is listed as a dependency in the bower file. You will not have to install it separately.
@@ -1347,7 +1349,7 @@ The Clod Sketch Library allows users with little programming knowledge to easily
 ### Custom Sketch Protocol
 
 
-**Why is this Necessary?**
+#### Why is this Necessary?
 
 Suppose a user wants to upload a sketch that monitors and logs the temperature, we'll call it `Basic_Temp`. Per the [walkthrough](https://github.com/jakeloggins/Clod-scripts/blob/master/README.md), the sketch needs to know how to respond to `/deviceInfo/` requests to its endpoint topics. So we'll program the sketch to give the device a name of `Basic Temperature`, a single endpoint of `temperature`, and a path of `/house/`. Easy enough. 
 
@@ -1358,7 +1360,7 @@ But what happens when a user wants to monitor the temperature in 5 different loc
 Therefore, the protocol allows the user to specify unique device and endpoint names but keep the same basic sketch.
 
 
-**Namepins.h**
+#### Namepins.h
 
 The uploader script handles user customization by writing to the file `namepins.h` that is included in the main sketch file of `main.cpp`. In this way, customized information received by the uploader script may be incorporated to the sketch without repeatedly hardcoding the main file. Each time a user uploads a sketch, the `namepins.h` file is overwritten.
 
@@ -1374,7 +1376,7 @@ Within `namepins.h`, the following variables are created from the device object:
 * `String subscribe_path` - The path followed by a `#` symbol to subscribe to all required endpoints.
 
 
-**Pin Numbers**
+#### Pin Numbers
 
 Different espressif models have different I/O pin configurations. To allow a sketch to work with all models, the uploader script reads the `board_type` from within the `espInfo` object and defines letters to pin numbers. For example, a `board_type` of `esp01_1m` would write this into the `namepins.h` file:
 
@@ -1392,7 +1394,7 @@ Different espressif models have different I/O pin configurations. To allow a ske
 Therefore, a sketch can refer to PIN_A and the uploader script will decide the appropriate pin number.
 
 
-**Static Endpoint Id**
+#### Static Endpoint Id
 
 To begin the upload process, a device object is sent to the uploader script. Within the device object is the endpoints object, which is the main way Clod updates values between users and devices (a detailed look at the device object is in the [walkthrough](https://github.com/jakeloggins/Clod-scripts/blob/master/README.md). Here's an example of a device's endpoints object:
 
@@ -1436,12 +1438,12 @@ String lookup(String endpoint_key) {
 When the sketch receives a message, it should send the endpoint portion of the MQTT topic to the `lookup` function. The function will return a String, which the sketch can use to know what the endpoint is supposed to do. In the example above, the user has named an endpoint `Alarm Light`. The lookup function associates that name with `RGB`. The sketch is programmed to adjust the values of a neopixel strip whenever the lookup function sends it the string `RGB`. 
 
 
-**Platform IO File Structure**
+#### Platform IO File Structure
 
 For now, all custom sketches can be found in their own folder within Crouton's sketches directory. These follow Platform IO's project folder format, which you can read about [here](http://docs.platformio.org/en/latest/ide/atom.html#setting-up-the-project). The Crouton dashboard's uploader interface looks through the sketches directory and generates a list of the project folders. Your sketch should be named main.cpp and placed in the project's `src` folder. Libraries for only your project go in the project's `lib` folder. The `.pioenvs` folder is Platform IO's cache system. Do not edit the `.pioenvs` folder, it will be periodically deleted by Platform IO and ignored within this git.  
 
 
-**Default Endpoints**
+#### Default Endpoints
 
 A sketch should have a `default_endpoints.json` file within its project folder. This is used by the uploader script to create the endpoints object if one was not sent to it. Default endpoint keys and titles should be intuitive and short. The default endpoint file *must* have a static_endpoint_id, because uploader creates a fresh namepins.h file before each upload. Here's an example default_endpoints.json file:
 
@@ -1462,32 +1464,32 @@ A sketch should have a `default_endpoints.json` file within its project folder. 
 }
 ```
 
-**Custom Endpoints**
+#### Custom Endpoints
 
 Custom endpoints can be changed on the user's end by simply changing the `default_endpoints.json` file. Future releases of Clod will bring this process to the Crouton dashboard, and introduce the use of a separate `custom_endpoints.json` file.
 
 
-**Hookup Guide**
+#### Hookup Guide
 
 The hookup guide provides an additional set of instructions to the user after they have completed the upload process. This step is particularly important for non-technical users. A `guide.md` file should be included in the sketch's project folder. If there are any specific precautions, notes, or wiring instructions that go along with the sketch, they should be placed here. When the upload process is executed within the Crouton dashboard, the user will be prompted to view this file. 
 
 
-**But I don't care about sharing with other people, can I just quickly hack something together for myself?**
+#### But I don't care about sharing with other people, can I just quickly hack something together for myself?
 
 Yes. Look at the example clients, MQTT Standard, and the walkthrough. Write a sketch that does the minimum to follow those guidelines and upload it to your device manually. Every aspect of Clod, excluding the uploader, will be fully available to your device.
 
 
-**What about non-espressif devices?**
+#### What about non-espressif devices?
 
 Currently, the uploader is only compatible with espressif based devices. But future releases of the uploader script can, in theory, easily handle any device or platform that works with Platform IO.
 
 
-### Add Your Sketch to the Library
+####  Add Your Sketch to the Library
 
 For now, just add your sketch folder to this git and submit a pull request. 
 
 
-### Automatic Sketch Library Updates
+#### Automatic Sketch Library Updates
 
 Coming soon: updating the library after installation.
 Coming soon: browsing and downloading individual sketches from within an intuitive web catalog.
