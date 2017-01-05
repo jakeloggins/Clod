@@ -53,7 +53,7 @@ Here's a chart showing how everything is intended to fit together:
 
 
 
-Clod MQTT Standard
+[Clod MQTT Standard](https://github.com/jakeloggins/Clod-MQTT-Standard)
 ==================
 
 MQTT is a messaging protocol that is perfect for the Internet of Things. Messages are sent to topics, which is a string separated by forward slashes ` /just/like/this ` and contain payloads that can be a string ` "like this" ` or an object `{ "like": "this" }" `. 
@@ -697,7 +697,8 @@ Example:
 Clod Scripts Walkthrough
 ========================
 
-This section explains the behavior of the Clod scripts as an esp chip is added to the system and a user performs typical interactions with it. 
+This section explains the behavior of the [Clod scripts](
+[Clod MQTT Standard](https://github.com/jakeloggins/Clod-scripts)) as an esp chip is added to the system and a user performs typical interactions with it. 
 
 
 ### Init_Config
@@ -1169,7 +1170,7 @@ These card types are not yet supported:
 
 
 
-Clod Sketch Library
+[Clod Sketch Library](https://github.com/jakeloggins/Clod-sketch-library)
 ===================
 
 The Clod Sketch Library allows users with little programming knowledge to easily customize and upload sketches to esp devices. From an interface such as the Crouton dashboard, a user can simply select the name of a sketch, enter some customizing information, and press upload. Since all sketches work with over-the-air updates, a user can re-select the esp chip and upload a new sketch at anytime. This section covers how to prepare a sketch so that it is compatible with the Clod Sketch Library, and how to add it to the library. 
