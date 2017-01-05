@@ -697,8 +697,7 @@ Example:
 Clod Scripts Walkthrough
 ========================
 
-This section explains the behavior of the [Clod scripts](
-[Clod MQTT Standard](https://github.com/jakeloggins/Clod-scripts)) as an esp chip is added to the system and a user performs typical interactions with it. 
+This section explains the behavior of the [Clod scripts](https://github.com/jakeloggins/Clod-scripts) as an esp chip is added to the system and a user performs typical interactions with it. 
 
 
 ### Init_Config

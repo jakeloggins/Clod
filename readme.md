@@ -88,7 +88,7 @@ This section will cover the initial setup of the Raspberry Pi, which will manage
 Advanced Guide
 --------------
 
-The advanced guide is for those who want a deeper understanding of the Clod system. Read it [here](developer-guide.md). 
+The advanced guide is for those who want a deeper understanding of the Clod system. Read it [here](advanced-guide.md). 
 
 The chart below is a preview for what is explained in the advanced guide: 
 
