@@ -159,7 +159,7 @@ Most routine communication between the user and devices are covered by the proce
  * the persistence script maintains information about all devices within Clod and makes it available to other devices and scripts 
    * ` /persistence/[command]/name `
 
- * the uploader script allows a user to customize and upload a sketch from the [Clod Sketch Library](https://github.com/jakeloggins/Clod) to an esp chip. 
+ * the uploader script allows a user to customize and upload a sketch from the [Clod Sketch Library](#clod-sketch-library) to an esp chip. 
    * ` /uploader/[command]/name `
 
  * the scheduler sends normal control commands to endpoints at specified times. 
@@ -695,7 +695,7 @@ Example:
 
 
 Clod Scripts Walkthrough
-==============
+========================
 
 This section explains the behavior of the Clod scripts as an esp chip is added to the system and a user performs typical interactions with it. 
 
@@ -1159,7 +1159,7 @@ The Clod Sketch Library allows users with little programming knowledge to easily
 
 #### Why is this Necessary?
 
-Suppose a user wants to upload a sketch that monitors and logs the temperature, we'll call it `Basic_Temp`. Per the [walkthrough](https://github.com/jakeloggins/Clod-scripts/blob/master/README.md), the sketch needs to know how to respond to `/deviceInfo/` requests to its endpoint topics. So we'll program the sketch to give the device a name of `Basic Temperature`, a single endpoint of `temperature`, and a path of `/house/`. Easy enough. 
+Suppose a user wants to upload a sketch that monitors and logs the temperature, we'll call it `Basic_Temp`. Per the [walkthrough](#clod-scripts-walkthrough), the sketch needs to know how to respond to `/deviceInfo/` requests to its endpoint topics. So we'll program the sketch to give the device a name of `Basic Temperature`, a single endpoint of `temperature`, and a path of `/house/`. Easy enough. 
 
 The uploader script will happily upload this sketch to a device. It will lookup information about the esp device, navigate to the sketch's Platform IO project folder, modify the platformio.ini file, and run the Platform IO command. Everything is great.
 
@@ -1204,7 +1204,7 @@ Therefore, a sketch can refer to PIN_A and the uploader script will decide the a
 
 #### Static Endpoint Id
 
-To begin the upload process, a device object is sent to the uploader script. Within the device object is the endpoints object, which is the main way Clod updates values between users and devices (a detailed look at the device object is in the [walkthrough](https://github.com/jakeloggins/Clod-scripts/blob/master/README.md). Here's an example of a device's endpoints object:
+To begin the upload process, a device object is sent to the uploader script. Within the device object is the endpoints object, which is the main way Clod updates values between users and devices (a detailed look at the device object is in the [walkthrough](#clod-scripts-walkthrough). Here's an example of a device's endpoints object:
 
 ```json
 "endPoints": {
