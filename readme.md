@@ -3,7 +3,7 @@ Clod
 
 [![Join the chat at https://gitter.im/ClodMQTT/Lobby](https://badges.gitter.im/ClodMQTT/Lobby.svg)](https://gitter.im/ClodMQTT/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-Clod is a system for easily deploying IoT devices based on espressif chips like the ESP8266. It is intended to be self-contained within the user's network, so that data and controls are private and isolated from the internet. Its components are a disorganized mess of other great open source software projects that together form a coherent user experience. A clod is a clump of dirt, which is the opposite of a stack, and as far as one can get from a cloud.
+Clod is an open source control system for espressif chip projects. Clod does not connect to the cloud and is not meant to interface with commerical IoT devices. Commercial, cloud-dependent IoT devices are too expensive and generally a [bad idea](https://twitter.com/internetofshit). The system is designed for makers who want to quickly create something and control it, and for those without programming experience who want to follow a simple tutorial. Its components are a disorganized mess of other great open source software projects that together form a coherent user experience. A clod is a clump of dirt, which is the opposite of a stack, and as far as one can get from a cloud.
 
 The main components of Clod are:
 
@@ -24,9 +24,10 @@ The main components of Clod are:
 * [Clod Sketch Library](https://github.com/jakeloggins/Clod-sketch-library) - Arduino sketches that have been modified for use with Clod and ESP8266 chips.
 
 
+Basic Guide
+----------
 
-Raspberry Pi Installation
---------------------------
+#### Raspberry Pi Installation
 
 This section will cover the initial setup of the Raspberry Pi, which will manage device communication, monitoring, and maintenance. There are two options for completing it:
 
@@ -39,15 +40,12 @@ This section will cover the initial setup of the Raspberry Pi, which will manage
   * Does not require the use of a monitor.
 
 
-
-ESP8266 Installation
---------------------
+#### ESP8266 Installation
 
 * Install the Initial Configuration script on your ESP8266 by following [this guide](https://github.com/jakeloggins/Clod/blob/master/esp-install.md).
 
 
-Getting Started
-----------------
+#### Getting Started
 
 * **Prerequisites**:
   * All of the components installed, configured and running properly on your Raspberry Pi. 
@@ -87,12 +85,12 @@ Getting Started
 
 
 
-Advanced Topics
----------------
+Advanced Guide
+--------------
 
-Check out the [Clod Sketch Library](https://github.com/jakeloggins/Clod-sketch-library) to see what you can do with Clod. If you don't see something useful, [make your own sketch](https://github.com/jakeloggins/Clod-sketch-library#custom-sketch-protocol) or send me a suggestion on gitter.
+The advanced guide is for those who want a deeper understanding of the Clod system. Read it [here](developer-guide.md). 
 
-Don't like the Crouton interface? Everything in Clod is managed by MQTT messages. Crouton is simply one of many ways to send and receive them. Familiarize yourself with the [data structure](https://github.com/jakeloggins/Clod-scripts/blob/master/README.md) and make your own interface. 
+The chart below is a preview for what is explained in the advanced guide: 
 
-Want to add a non-espressif device? Use the example [python](https://github.com/jakeloggins/Clod-scripts/tree/master/clients/python) and [arduino](https://github.com/jakeloggins/Clod-scripts/tree/master/clients/non_esp_arduino_example_basic_blink) clients.
+![User-flow-chart](https://raw.githubusercontent.com/jakeloggins/Clod/master/img/complete_flow.png)
 
