@@ -173,7 +173,7 @@ The payload format is simply an object, depending on the following contexts.
 
 #### Device Objects
 
-All of a device's information that is required by Clod can be found in its device object. The device object is sent to `/deviceInfo/` whenever a user adds a device to the Crouton dashboard, a new sketch is uploaded, or after loss of connection to the MQTT broker. The device object is the primary method for Crouton to understand the device. It is the first message the device will send to Crouton to establish connection and also the message that describes the device and values to Crouton. 
+All of a device's information that is required by Clod can be found in its device object. The device object is sent to `/deviceInfo/` whenever a user adds a device to the Crouton dashboard, a new sketch is uploaded, or after loss of connection to the MQTT broker. The device object is the primary method for Crouton to understand the device. It is the first message the device will send to Crouton Dashboard to establish connection and also the message that describes the device and values to Crouton. 
 
 Device object example:
 
@@ -248,6 +248,7 @@ An entry in endPoints:
 "barDoor": {
   "title": "Bar Main Door",
   "card-type": "crouton-simple-text",
+  "static_endpoint_id": "door",
   "units": "people entered",
   "values": {
       "value": 34
@@ -257,7 +258,7 @@ An entry in endPoints:
 
 #### From User
 
-The user has the ability to update the value of the device's endpoints via certain dashboard cards. Therefore the device needs to be subscribe to all of its endpoint topics. The payload from the user is in the same format as the one coming from the device.
+The user can change the value of a device endpoint by sending an MQTT message to the endpoint's address. Therefore the device needs to subscribe to all of its endpoint topics. The payload from the user is in the same format as the one coming from the device.
 
 ```
 Address: /[path]/control/Kroobar/barDoor
@@ -266,7 +267,7 @@ Payload: {"value": 35}
 
 #### From Device
 
-To update values on the dashboard from the device, simply publish messages to the `confirm` of the endPoint which Crouton is already subscribed to. The payload is just the same as the one coming from Crouton.
+The device can update endpoint values by simply publishing messages to the `confirm` of the endPoint which Crouton is already subscribed to. The payload is just the same as the one coming from Crouton. These messages will be read by Clod Scripts to ensure persistence in case the device disconnects.
 
 ```
 Address: /[path]/confirm/Kroobar/barDoor
@@ -275,7 +276,7 @@ Payload: {"value": 35}
 
 #### Last will and testament (LWT)
 
-In order for Crouton to know when the device has unexpectedly disconnected, the device must create a LWT with the MQTT Broker. This a predefined broadcast that the broker will publish on the device's behalf when the device disconnects. The payload in this case can be anything as long as the address is correct.
+In order for Clod to know when the device has unexpectedly disconnected, the device must create a LWT with the MQTT Broker. This a predefined broadcast that the broker will publish on the device's behalf when the device disconnects. The payload in this case can be anything as long as the address is correct.
 
 ```
 Address: /[path]/errors/Kroobar
@@ -343,198 +344,7 @@ Payload: anything
 [Crouton Dashboard](https://github.com/jakeloggins/crouton-new)
 ==============================================================
 
-Crouton is a dashboard that lets you visualize and control your IOT devices with minimal setup. Essentially, it is the easiest dashboard to setup for any IoT hardware enthusiast using only MQTT and JSON.
-
-
-
-### Connecting to Crouton
-
-
-First, have Crouton and the device connected to the same MQTT Broker. The connection between the device and Crouton will be initiated from Crouton, therefore the device needs to subscribe to its own path.
-
-```
-Device should subscribe to the following:
-/deviceInfo/[the device name]/control
-```
-
-Every time the device successfully connects to the MQTT Broker, it should publish its *deviceInfo*. This is needed for auto-reconnection. If Crouton is waiting for the device to connect, it will listen for the *deviceInfo* when the device comes back online.
-
-```
-Device should publish deviceInfo JSON once connected
-/deviceInfo/[the device name]/confirm
-```
-
-#### DeviceInfo
-
-<!-- This might not be true anymore with persistence -->
-
-The deviceInfo is the primary method for Crouton to understand the device. It is the first message the device will send to Crouton to establish connection and also the message that describes the device and values to Crouton. The primary object is *deviceInfo*. Within *deviceInfo* there are several keys as follows:
-
-```json
-{
-  "deviceInfo": {
-    "device_name": "kroo bar",
-    "device_name_key": "krooBar",
-    "device_status": "connected",
-    "current_ip": "192.xxx.xxx.xxx",
-    "type": "esp",
-    "path": "/bar/front/entrance",
-    "card_display_choice": "default",
-    "description": "Kroobar's IOT devices",
-    "espInfo": {
-      ...
-    },
-    "endPoints": {
-      "barDoor": {
-        "title": "Bar Main Door",
-        "card-type": "crouton-simple-text",
-        "units": "people entered",
-        "values": {
-            "value": 34
-        }
-      }
-    }
-  }
-}
-```
-
-* *device_name*: A string that is the name for the device. This is same name you would use to add the device
-* *device_name_key*: a camelized version of device_name. Necessary for the MQTT topic.
-* *device_status*: A string that describes the status of the device 
-* *current_ip*: the IP address assigned during the upload process
-* *type*: required for the persistence script.
-* *path*: Specifies the location to publish and subscribe on the mqtt broker
-* *card_display_choice*: used during the upload process. options are default or custom
-* *espInfo*: an object with data about the espressif chip. Used during initial configuration, upload, and persistence.
-* *description*: A string that describes the device (for display to user only)
-* *endPoints*: An object that configures each dashboard element Crouton will show. There can be more than one endPoint which would be key/object pairs within *endPoints*
-
-<!--
-  * *function*: A string within an endpoint that is used to group together endpoints for global commands
--->
-
-
-Note: Both *device_name* and *endPoints* are required and must be unique to other names or *endPoints* respectively
-
-<!--
-**Note**: There is now an additional method for adding and altering single card devices, discussed below. If you have multiple cards and store the deviceInfo JSON in your script, simply select "Auto Import" and type in the device name to add to the dashboard.
--->
-
-#### Addresses
-
-Addresses are what Crouton and the device will publish and subscribe to. They are also critical in making the communication between Crouton and the devices accurate therefore there is a structure they should follow.
-
-```
-/[path]/[command type]/[device name]/[endPoint name]
-```
-
-*command type*: Helps the device and crouton understand the purpose of a message. Generally, *control* is for messages going *to* the device and *confirm* is for messages *from* the device. Last will and testament messages are sent to *errors*. A final command type, *log*, is reserved for future use.
-
-```
-control, confirm, errors, log
-```
-
-*path*: a custom prefix where all messages will be published. Using location names is recommended. Command type words may not be used within the path.
-
-```
-ex: /house/downstairs/kitchen
-```
-
-*device name*: The name of the device the are targeting; from *name* key/value pair of *deviceInfo*
-
-*endPoint name*: The name of the endPoint the are targeting; from the key used in the key/object pair in *endPoints*
-
-Note: All addresses must be unique to one MQTT Broker. Therefore issues could be encounter when using public brokers where there are naming conflicts.
-
-<!-- this is repetitive from the previous section -->
-
-### Updating device values
-
-Updating device values can come from Crouton or the device. The message payload will be a JSON that updates the value. This JSON will be equivalent to the object of the key *values* within each endPoint. However, only values that are being updated needs to be updated. All other values must be updated by the deviceInfo JSON.
-
-```json
-Payload: {"value": 35}
-
-An entry in endPoints:
-"barDoor": {
-  "title": "Bar Main Door",
-  "card-type": "crouton-simple-text",
-  "static_endpoint_id": "door",
-  "units": "people entered",
-  "values": {
-      "value": 34
-  }
-}
-```
-
-#### From Crouton
-
-Crouton has the ability to update the value of the device's endPoints via certain dashboard cards. Therefore the device needs to be subscribe to certain addresses detailed in the Endpoints section below. The payload from Crouton is in the same format as the one coming from the device.
-
-```
-Address: /[path]/control/Kroobar/barDoor
-Payload: {"value": 35}
-```
-
-#### From Device
-
-To update values on Crouton from the device, simply publish messages to the outbox of the endPoint which Crouton is already subscribed to. The payload is just the same as the one coming from Crouton.
-
-```
-Address: /[path]/confirm/Kroobar/barDoor
-Payload: {"value": 35}
-```
-
-#### Last will and testament (LWT)
-
-In order for Crouton to know when the device has unexpectedly disconnected, the device must create a LWT with the MQTT Broker. This a predefined broadcast that the broker will publish on the device's behalf when the device disconnects. The payload in this case can be anything as long as the address is correct.
-
-```
-Address: /[path]/errors/Kroobar
-Payload: anything
-```
-
-#### Endpoints
-
-A device can have multiple endPoints. Each endPoint represents a dashboard card that will be displayed on the dashboard.
-
-The device must subscribe to the [path]/control of each endPoint which may receive values from Crouton. For example, a toggle switch on Crouton may change a value on the device therefore a subscription is necessary; however, an alert button which sends only messages from device to Crouton may not need a subscription because the device does not expect any values from Crouton.
-
-```
-Subscription address for endPoints on device:
-/[path]/control/[device name]/[endpoint name]
-```
-
-Upon receiving a new value from Crouton, the device **must** send back the new value or the appropriate value back to Crouton on [path]/confirm/[device name]/[endpoint name]. This is because Crouton will not reflect the new value change *unless* it is coming from the device.
-
-Therefore the value shown on Crouton more accurately reflects the value on the device.
-
-```
-Address: /[path]/confirm/[device name]/[endpoint name]
-Payload: {"value": "some new value here"}
-```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+The Crouton Dashboard is an optional web interface that assembles and sends Clod MQTT messages. The user can more easily view realtime data, control, and manage espressif chips. Everything performed by the dashboard can be done with basic MQTT messages instead. Alternative graphical interfaces can be created easily, so long as they conform to the Clod MQTT Standard and the overall Clod Scripts process described elsewhere in this guide.
 
 
 Dashboard Cards
@@ -573,7 +383,7 @@ Simple card prefix:
 crouton-simple-[card type]
 ```
 
-**Simple Text**
+#### Simple Text
 
 ![Crouton-simple-text](https://raw.githubusercontent.com/jakeloggins/crouton-new/master/public/common/images/crouton-simple-text.png) </br> Simple text is used to display a value (text or number) on the dashboard from the device to Crouton.
 
@@ -592,7 +402,7 @@ Example:
 }
 ```
 
-**Simple Dropdown**
+#### Simple Dropdown
 
 A dropdown menu is used to select a value from the `choices` array.
 
@@ -626,7 +436,7 @@ Example:
 }
 ```
 
-**Simple Input**
+#### Simple Input
 
 ![Crouton-simple-text](https://raw.githubusercontent.com/jakeloggins/crouton-new/master/public/common/images/crouton-simple-input.png) </br> Simple input is similar to simple text except the user can update the value on the device from Crouton. There is no length restriction of the value by Crouton.
 
@@ -717,7 +527,7 @@ Example:
 
 These cards are for charts!
 
-####Donut Chart
+#### Donut Chart
 
 ![Crouton-chart-donut-1](https://raw.githubusercontent.com/jakeloggins/crouton-new/master/public/common/images/crouton-chart-donut-1.png)
 
@@ -881,14 +691,13 @@ Example:
 
 
 
-<!--Transition here between here is the interface and how it works, but you can also make your own, here's the overview with Clod Scripts walkthrough-->
 
 
 
 Clod Scripts Walkthrough
 ==============
 
-This section explains the behavior of the Clod scripts as an esp chip is added to the system and a user performs typical interactions with it.
+This section explains the behavior of the Clod scripts as an esp chip is added to the system and a user performs typical interactions with it. 
 
 
 ### Init_Config
@@ -1343,8 +1152,7 @@ The scheduler connects to the MQTT broker from the information stored in the /pu
 Clod Sketch Library
 ===================
 
-The Clod Sketch Library allows users with little programming knowledge to easily customize and upload sketches to esp devices. From an interface such as the Crouton dashboard, a user can simply select the name of a sketch, enter some customizing information, and press upload. Since all sketches work with over-the-air updates, a user can re-select the esp chip and upload a new sketch at anytime. This section covers how to prepare a sketch so that it is compatible with the Clod Sketch Library, and how to add it to the library. **If you just want to use Clod, you do not need to read this section.**
-
+The Clod Sketch Library allows users with little programming knowledge to easily customize and upload sketches to esp devices. From an interface such as the Crouton dashboard, a user can simply select the name of a sketch, enter some customizing information, and press upload. Since all sketches work with over-the-air updates, a user can re-select the esp chip and upload a new sketch at anytime. This section covers how to prepare a sketch so that it is compatible with the Clod Sketch Library, and how to add it to the library. 
 
 ### Custom Sketch Protocol
 
