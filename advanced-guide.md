@@ -9,13 +9,13 @@ The intended use case of Clod is some espressif chips, programmed in arduino, co
 
 However, not everyone will follow the intended use. Thus, the project is split into separate components to make it easy to customize and understand. These are:
 
-* Clod MQTT Standard - a common syntax designed for console readability
+* [Clod MQTT Standard](#clod-mqtt-standard) - a common syntax designed for console readability
 
-* Crouton Dashboard - a web dashboard featuring various buttons, toggles, graphs, and menus. Helps with additional functionality such as OTA uploading and scheduling.
+* [Crouton Dashboard](#crouton-dashboard) - a web dashboard featuring various buttons, toggles, graphs, and menus. Helps with additional functionality such as OTA uploading and scheduling.
 
-* Clod Scripts - a series of node scripts that listen to MQTT traffic and assist with features such as initial configuration, device persistence, OTA uploading, and scheduling.
+* [Clod Scripts](#clod-scripts-walkthrough) - a series of node scripts that listen to MQTT traffic and assist with features such as initial configuration, device persistence, OTA uploading, and scheduling.
 
-* Clod Sketch Library - Arduino sketch templates that allow users to easily customize, replicate, and share projects.
+* [Clod Sketch Library](#clod-sketch-library) - Arduino sketch templates that allow users to easily customize, replicate, and share projects.
 
 Here's a chart showing how everything is intended to fit together:
 
